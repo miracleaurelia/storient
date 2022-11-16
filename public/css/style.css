@@ -4,10 +4,16 @@
     list-style: none;
     text-decoration: none !important;
     box-sizing: border-box;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+        "Lucida Sans", Arial, sans-serif;
     scroll-behavior: smooth;
 }
-
+body {
+    background-color: #191919 !important;
+}
+p {
+    color: white;
+}
 /* navbar */
 
 .navbar-brand img {
@@ -29,7 +35,7 @@
     line-height: 50px;
     transition: all 0.5s;
     z-index: 1;
-    background-image: linear-gradient(315deg, #000000 0%, #2C3E50 70%);
+    background-image: linear-gradient(315deg, #000000 0%, #2c3e50 70%);
 }
 
 /* end of navbar */
@@ -57,7 +63,7 @@
     z-index: 999;
     top: 50%;
     left: 50%;
-    transform: translate(-50%,-50%);
+    transform: translate(-50%, -50%);
 }
 
 .content h2 {
@@ -74,12 +80,12 @@
     margin-bottom: 2rem !important;
 }
 
-.services:nth-child(3n+1) .card {
+.services:nth-child(3n + 1) .card {
     background: #67676a !important;
     color: #fff;
 }
 
-.services:nth-child(3n+2) .card {
+.services:nth-child(3n + 2) .card {
     background: #2e2e38 !important;
     color: #fff;
 }
@@ -88,7 +94,6 @@
     background: #000000 !important;
     color: #fff;
 }
-
 
 .awards-section {
     position: relative;
@@ -112,7 +117,7 @@
     text-align: center;
     display: inline-block;
     border-radius: 50%;
-    background-image: linear-gradient( -82deg, #7f8c8d 0%, #425354 74%);
+    background-image: linear-gradient(-82deg, #7f8c8d 0%, #425354 74%);
 }
 
 img {
@@ -127,7 +132,7 @@ img {
 
 .awards-item::before {
     position: absolute;
-    content: '';
+    content: "";
     top: 0;
     left: 0;
     width: 100%;
@@ -142,7 +147,7 @@ img {
 
 .awards-item::after {
     position: absolute;
-    content: '';
+    content: "";
     top: 0;
     left: 0;
     width: 100%;
@@ -179,11 +184,10 @@ img {
 .awards-content .title {
     margin-bottom: 10px;
 }
-  
+
 .awards-content p {
     margin-bottom: 20px;
 }
-
 
 .mt-30 {
     margin-top: 30px;
@@ -217,11 +221,11 @@ img {
     padding-bottom: 100px;
 }
 
-.awards-item h3, .awards-item p {
+.awards-item h3,
+.awards-item p {
     color: white;
 }
 /* end of about us section */
-
 
 /* additional stuff */
 .update {
@@ -263,8 +267,8 @@ img {
     z-index: 1;
     transition: all 0.3s ease 0s;
 }
-.book-list .book-list-body .table tbody .action-list li a:hover { 
-    text-shadow: 3px 3px 0 rgba(255,255,255,0.3); 
+.book-list .book-list-body .table tbody .action-list li a:hover {
+    text-shadow: 3px 3px 0 rgba(255, 255, 255, 0.3);
 }
 
 .book-list .book-list-body .table tbody .action-list li a:before,
@@ -285,7 +289,7 @@ img {
 }
 
 .book-list .book-list-body .table tbody .action-list li a:after {
-    content: '';
+    content: "";
     height: 15px;
     width: 15px;
     padding: 0;
@@ -305,24 +309,23 @@ img {
     padding: 0;
     border-radius: 10px;
     border: none;
-    box-shadow: 0 0 0 5px rgba(0,0,0,0.05),0 0 0 10px rgba(0,0,0,0.05);
+    box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.05), 0 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
-.book-list .book-list-body .table tbody tr td, 
+.book-list .book-list-body .table tbody tr td,
 .book-list .book-list-body .table thead tr th {
     color: white;
 }
 
-.book-list .book-list-body .table tbody tr:nth-child(even) { 
-    background-color: rgba(255,255,255,0.2); 
+.book-list .book-list-body .table tbody tr:nth-child(even) {
+    background-color: rgba(255, 255, 255, 0.2);
 }
 /* end of book collection */
 
 /* footer section */
 .footer-section {
-    background-image: linear-gradient(180deg, #28313B 30%, #485461 100%);
+    background-image: linear-gradient(180deg, #28313b 30%, #485461 100%);
 }
-
 
 .footer-section {
     padding-top: 50px;
@@ -358,7 +361,7 @@ img {
 .blog-social li a:hover,
 .blog-social li a.active {
     color: #fff;
-    background-image: linear-gradient(315deg, #000000 0%, #2C3E50 70%);
+    background-image: linear-gradient(315deg, #000000 0%, #2c3e50 70%);
     border: 1px solid transparent;
 }
 
@@ -432,13 +435,15 @@ img {
     border-left: solid 50px #20202a;
 }
 
-.bookForm-img, .insert-img {
+.bookForm-img,
+.insert-img {
     padding: 1rem;
     width: 50%;
     display: inline-block;
 }
 
-.bookForm-img img, .insert-img img {
+.bookForm-img img,
+.insert-img img {
     max-width: 100%;
     max-height: 300px;
     display: block;
@@ -481,7 +486,7 @@ img {
     outline: none;
 }
 
-.book-form .book-input:focus+label {
+.book-form .book-input:focus + label {
     background: #67676a;
     color: #20202a;
 }
