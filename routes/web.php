@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
+use Facade\FlareClient\View;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,7 +52,7 @@ Route::get(
 )->name('editBook');
 
 Route::post(
-    'post/update/{id}', 
+    'post/update/{id}',
     [BookController::class, 'update']
 )->name('updateBook');
 
@@ -64,3 +65,10 @@ Route::get(
     'deleteDB/book/{id}',
     [BookController::class, 'deleteDB']
 )->name('deleteDB');
+
+Route::get("/login", function () {
+    return view("login");
+});
+Route::get("/register", function () {
+    return view("register");
+});
