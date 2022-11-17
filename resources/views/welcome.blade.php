@@ -5,7 +5,7 @@
 @section('content')
     <div id="carouselExampleIndicators" class="carousel slide m" data-bs-ride="carousel" style="padding-top: 88px;">
         <div class="content text-center">
-            <h2>WELCOME TO PM LIBRARY</h2>
+            <h2>WELCOME TO STORIENT</h2>
             <div class="d-flex justify-content-center">
                 <a href="#about-us-id" class="cmn-btn">About Us</a>
             </div>
