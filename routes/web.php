@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
@@ -16,20 +17,26 @@ use Facade\FlareClient\View;
 |
 */
 
-Route::get(
-    '/',
-    [HomeController::class, 'index']
-);
+Route::get('/',[HomeController::class, 'index'])->name('home');
 
-Route::get(
-    '/display/book',
-    [BookController::class, 'showBook']
-)->name('display');
+Route::get('/display/book',[BookController::class, 'showBook'])->name('display');
 
-Route::get(
-    '/create/book',
-    [BookController::class, 'createBook']
-)->name('createBook');
+Route::middleware('guest')->group(function () {
+    Route::get("/login", function () {
+        return view("login");
+    })->name('login');
+    Route::post("/login", [AuthController::class,'login'])->name('loginUser');
+    Route::get("/register", function () {
+        return view("register");
+    })->name('register');
+    
+});
+
+Route::middleware('auth')->group(function () {
+    
+});
+
+Route::get('/create/book',[BookController::class, 'createBook'])->name('createBook');
 
 Route::post(
     '/store/book',
@@ -66,9 +73,4 @@ Route::get(
     [BookController::class, 'deleteDB']
 )->name('deleteDB');
 
-Route::get("/login", function () {
-    return view("login");
-});
-Route::get("/register", function () {
-    return view("register");
-});
+

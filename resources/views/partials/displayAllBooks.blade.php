@@ -10,9 +10,7 @@
                 <a href="/delete/book" class="btn btnBookLink @if (View::getSection('title') == 'Delete Book') active @endif">Delete
                     Book</a>
             </div>
-
             <div class="book-list">
-
                 <div class="book-list-body table-responsive">
 
                     <table class="table">

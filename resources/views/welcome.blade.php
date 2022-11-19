@@ -99,19 +99,19 @@
                             @for ($i = 0; $i < count($awardsDetail); $i++)
                                 @if ($i % 2)
                                     <div class="col-lg-6 mb-30">
-                                        <div class="awards-item awards-item--style text-center mt-30">
-                                        @else
-                                            <div class="col-lg-6">
-                                                <div class="awards-item text-center">
+                                    <div class="awards-item awards-item--style text-center mt-30">
+                                @else
+                                    <div class="col-lg-6">
+                                    <div class="awards-item text-center">
                                 @endif
                                 <div class="awards-icon">
                                     <img src="{{ asset('images/' . $awardsDetail[$i]['img']) }}">
                                 </div>
                                 <h3 class="title">{{ $awardsDetail[$i]['name'] }}</h3>
                                 <p>{{ $awardsDetail[$i]['desc'] }}</p>
-                        </div>
-                    </div>
-                    @endfor
+                                </div>
+                            </div>
+                            @endfor
                 </div>
             </div>
         </div>
