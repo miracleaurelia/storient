@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\MemberController;
+use App\Http\Controllers\TransactionController;
+use App\Models\Member;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
@@ -25,6 +28,12 @@ Route::get(
     '/display/book',
     [BookController::class, 'showBook']
 )->name('display');
+
+// Book Detail
+Route::get(
+    '/display/book/{id}',
+    [BookController::class, 'showBookDetail']
+)->name('displayBookDetail');
 
 Route::get(
     '/create/book',
@@ -72,3 +81,12 @@ Route::get("/login", function () {
 Route::get("/register", function () {
     return view("register");
 });
+Route::post('/register', [MemberController::class, 'register']);
+Route::post('/login', [MemberController::class, 'login']);
+
+Route::get('/profile', [MemberController::class, 'getProfile']);
+Route::get('/editProfile', [MemberController::class, 'getEditProfile']);
+Route::post('/editProfile', [MemberController::class, 'editProfile']);
+
+Route::get('/transaction', [TransactionController::class, 'getTransactions']);
+Route::get('/transaction/{id}', [TransactionController::class, 'getSelectedTransaction']);

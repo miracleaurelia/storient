@@ -9,19 +9,24 @@
                 <h1 class="mb-4">Create your account</h1>
 
                 <div class="card p-3 col-6  registerFormContainer" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                    @if (Session::has('success'))
+                        <div class="alert alert-success text-center">
+                            {{ Session::get('success') }}
+                        </div>
+                    @endif
                     <form action="/register" method="POST">
                         @csrf
                         <div class="form-group mb-3">
-                            <label for="inputName">Name</label>
-                            @error('name')
+                            <label for="inputUsername">Username</label>
+                            @error('username')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
                             @enderror
 
-                            <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                                id="inputName" aria-describedby="nameHelp" placeholder="Enter name"
-                                value="{{ old('name') }}">
+                            <input type="text" name="username" class="form-control @error('username') is-invalid @enderror"
+                                id="inputUsername" aria-describedby="usernameHelp" placeholder="Enter username"
+                                value="{{ old('username') }}">
 
                         </div>
                         <div class="form-group mb-3">
@@ -64,24 +69,24 @@
                         </div>
 
                         <div class="form-group mb-3">
-                            <label for="inputPhone">Phone</label>
-                            @error('phone')
+                            <label for="inputPhoneNumber">Phone Number</label>
+                            @error('phoneNumber')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
                             @enderror
-                            <input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror"
-                                id="inputPhone" placeholder="Phone Number" value="{{ old('phone') }}">
+                            <input type="text" name="phoneNumber" class="form-control @error('phoneNumber') is-invalid @enderror"
+                                id="inputPhoneNumber" placeholder="Phone Number" value="{{ old('phoneNumber') }}">
                         </div>
                         <div class="form-group mb-3">
-                            <label for="inputPhone">KTP No.</label>
+                            <label for="inputKTP">KTP No.</label>
                             @error('ktp')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
                             @enderror
                             <input type="text" name="ktp" class="form-control @error('ktp') is-invalid @enderror"
-                                id="inputktp" placeholder="KTP" value="{{ old('ktp') }}">
+                                id="inputKTP" placeholder="KTP" value="{{ old('ktp') }}">
                         </div>
                         <div class="form-group mb-3">
                             <label for="inputAddress">Address</label>
