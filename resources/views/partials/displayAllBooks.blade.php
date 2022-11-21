@@ -10,8 +10,10 @@
                 <a href="/delete/book" class="btn btnBookLink @if (View::getSection('title') == 'Delete Book') active @endif">Delete
                     Book</a>
             </div>
+
             <div class="book-list">
                 <div class="book-list-body table-responsive">
+
 
                     <table class="table">
                         <thead>
@@ -55,7 +57,7 @@
                                         </td>
                                     @elseif (View::getSection('title') == 'Display Book')
                                         <td>
-                                            <a href="/display/book/{{ $book->id }}" class="displayBookViewLink">View
+                                            <a href="/display/book/{{ $book->id }}" class="customViewLink">View
                                                 Book</a>
                                         </td>
                                     @endif

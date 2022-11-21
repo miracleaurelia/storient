@@ -12,6 +12,7 @@ class BookController extends Controller
     }
 
     public function storeBook(Request $request) {
+        // if('admin'){}
         $this->validate($request, [
             'bookTitle' => 'required|min:1|max:50',
             'author' => 'required|min:1|max:50',
@@ -34,6 +35,11 @@ class BookController extends Controller
     public function showBook() {
         $books = Book::all();
         return view('displayBook', compact('books'));
+    }
+
+    public function showBookDetail($id) {
+        $book = Book::find($id);
+        return view('displayBookDetail')->with('book', $book);
     }
 
     public function updateBookView() {
@@ -72,7 +78,7 @@ class BookController extends Controller
         if ($res) {
             return back()->with('msg', 'Data successfully deleted!');
         }
-        
+
         else {
             return back()->with('msg', 'No such book data found.');
         }

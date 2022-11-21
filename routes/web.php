@@ -1,6 +1,8 @@
 <?php
 
+
 use App\Http\Controllers\AuthController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
@@ -21,6 +23,7 @@ Route::get('/',[HomeController::class, 'index'])->name('home');
 
 Route::get('/display/book',[BookController::class, 'showBook'])->name('display');
 
+
 Route::middleware('guest')->group(function () {
     Route::get("/login", function () {
         return view("login");
@@ -37,6 +40,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::get('/create/book',[BookController::class, 'createBook'])->name('createBook');
+
 
 Route::post(
     '/store/book',

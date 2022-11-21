@@ -14,9 +14,9 @@
                             {{ session('alert') }}
                         </div>
                     @endif
-                    @if (session()->has('loginError'))
-                        <div class="text-danger">
-                            {{ session('loginError') }}
+                    @if (session()->has('error'))
+                        <div class="alert alert-danger text-danger text-center">
+                            {{ session('error') }}
                         </div>
                     @endif
                     <form action="{{ Route('loginUser') }}" method="POST">
@@ -28,7 +28,7 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                            <input type="email" class="form-control @error('email') is-invalid @enderror" name="email"
+                            <input type="text" class="form-control @error('email') is-invalid @enderror" name="email"
                                 id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
                                 value="{{ old('email') }}">
 
@@ -45,7 +45,7 @@
                                 value="{{ old('password') }}">
                         </div>
                         <button type="submit" class="btn btnLoginForm w-100">Login</button>
-                        <p class="dontHaveAccount">Don't have an account? <a href="/register">SignUp</a></p>
+                        <p class="dontHaveAccount">Don't have an account? <a href="/register">Sign Up</a></p>
 
                     </form>
                 </div>
