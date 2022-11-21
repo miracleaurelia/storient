@@ -60,7 +60,7 @@
 
     <nav class="navbar navbar-expand-md navbar-dark fixed-top p-4 ">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><img src="{{ URL::asset('/images/name_logo.png') }}"
+            <a class="navbar-brand" href="/"><img src="{{ URL::asset('/images/logo.png') }}"
                     alt=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -104,19 +104,24 @@
                         <a class="nav-link " aria-current="page" href="/display/book">Books</a>
                     </li>
                     {{-- Kalau Sudah Login --}}
-                    <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="/profile">Profile</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link " aria-current="page" href="/transaction">Transaction</a>
-                    </li>
+                    @if(auth()->check())
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="/profile">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="/transaction">Transaction</a>
+                        </li>
+                    @else
+                        <li class="nav-item ">
+                            <a class="nav-link navBtnGuestLogin" aria-current="page" href="{{ Route('login') }}">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link navBtnGuestRegister" aria-current="page" href="{{ Route('register') }}">Register</a>
+                        </li>
+                    @endif
+                    
                     {{-- Kalau Belum Login --}}
-                    <li class="nav-item ">
-                        <a class="nav-link navBtnGuestLogin" aria-current="page" href="/login">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link navBtnGuestRegister" aria-current="page" href="/register">Register</a>
-                    </li>
+                    
                 </ul>
 
             </div>

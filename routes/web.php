@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\MemberController;
-use App\Http\Controllers\TransactionController;
-use App\Models\Member;
+
+use App\Http\Controllers\AuthController;
+
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
@@ -19,26 +19,28 @@ use Facade\FlareClient\View;
 |
 */
 
-Route::get(
-    '/',
-    [HomeController::class, 'index']
-);
+Route::get('/',[HomeController::class, 'index'])->name('home');
 
-Route::get(
-    '/display/book',
-    [BookController::class, 'showBook']
-)->name('display');
+Route::get('/display/book',[BookController::class, 'showBook'])->name('display');
 
-// Book Detail
-Route::get(
-    '/display/book/{id}',
-    [BookController::class, 'showBookDetail']
-)->name('displayBookDetail');
 
-Route::get(
-    '/create/book',
-    [BookController::class, 'createBook']
-)->name('createBook');
+Route::middleware('guest')->group(function () {
+    Route::get("/login", function () {
+        return view("login");
+    })->name('login');
+    Route::post("/login", [AuthController::class,'login'])->name('loginUser');
+    Route::get("/register", function () {
+        return view("register");
+    })->name('register');
+    
+});
+
+Route::middleware('auth')->group(function () {
+    
+});
+
+Route::get('/create/book',[BookController::class, 'createBook'])->name('createBook');
+
 
 Route::post(
     '/store/book',
@@ -75,18 +77,4 @@ Route::get(
     [BookController::class, 'deleteDB']
 )->name('deleteDB');
 
-Route::get("/login", function () {
-    return view("login");
-});
-Route::get("/register", function () {
-    return view("register");
-});
-Route::post('/register', [MemberController::class, 'register']);
-Route::post('/login', [MemberController::class, 'login']);
 
-Route::get('/profile', [MemberController::class, 'getProfile']);
-Route::get('/editProfile', [MemberController::class, 'getEditProfile']);
-Route::post('/editProfile', [MemberController::class, 'editProfile']);
-
-Route::get('/transaction', [TransactionController::class, 'getTransactions']);
-Route::get('/transaction/{id}', [TransactionController::class, 'getSelectedTransaction']);

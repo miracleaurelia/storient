@@ -4,7 +4,7 @@
                 <div class="col-lg-12">
                     <div class="footer-bottom d-flex flex-wrap justify-content-between align-items-center">
                         <div class="footer-logo">
-                            <a href="#0"><img src="{{URL::asset('/images/name_logo.png')}}" alt="logo"></a>
+                            <a href="#0"><img src="{{URL::asset('/images/logo.png')}}" alt="logo"></a>
                         </div>
                         <div class="footer-btn d-flex">
                             <a href="#0" class="cmn-btn">Website</a>
@@ -25,7 +25,5 @@
             </div>
         </div>
     </div>
-
 </body>
-
 </html>

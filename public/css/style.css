@@ -27,8 +27,8 @@ nav.navbar {
 }
 .navbar-brand img {
     /* height: 55px; */
-    max-width: 200px;
-    max-height: 55px;
+    max-width: 100px;
+    max-height: 50px;
 }
 
 .greetings {
@@ -425,7 +425,7 @@ img {
 }
 
 .footer-logo a img {
-    height: 55px;
+    height: 105px;
 }
 /* end of footer section */
 

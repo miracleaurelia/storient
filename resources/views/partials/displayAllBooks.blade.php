@@ -11,9 +11,9 @@
                     Book</a>
             </div>
 
-            <div class="table-list">
+            <div class="book-list">
+                <div class="book-list-body table-responsive">
 
-                <div class="table-list-body table-responsive">
 
                     <table class="table">
                         <thead>
