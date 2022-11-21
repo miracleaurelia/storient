@@ -11,9 +11,9 @@
                     Book</a>
             </div>
 
-            <div class="book-list">
+            <div class="table-list">
 
-                <div class="book-list-body table-responsive">
+                <div class="table-list-body table-responsive">
 
                     <table class="table">
                         <thead>
@@ -57,7 +57,7 @@
                                         </td>
                                     @elseif (View::getSection('title') == 'Display Book')
                                         <td>
-                                            <a href="/display/book/{{ $book->id }}" class="displayBookViewLink">View
+                                            <a href="/display/book/{{ $book->id }}" class="customViewLink">View
                                                 Book</a>
                                         </td>
                                     @endif
