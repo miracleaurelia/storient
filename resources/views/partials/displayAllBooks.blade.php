@@ -13,22 +13,43 @@
 
             <div class="book-list">
                 <div class="book-list-body table-responsive">
+                    <div class="d-flex flex-wrap">
+                        @php
+                            $k = 1;
+                        @endphp
+                        @foreach ($books as $book)
+                            <div class="card mx-2 mb-3" style="width: 18rem;">
+                                <img class="card-img-top" src="..." alt="Card image cap">
+                                <div class="card-body ">
+                                    <h5 class="card-title">{{ $book->bookTitle }}</h5>
+                                    <p class="card-text text-dark">Author: {{ $book->author }}</p>
+                                    <p class="card-text text-dark">Page Count: {{ $book->pageCount }}</p>
+                                    <p class="card-text text-dark">Release Date: {{ $book->releaseYear }}</p>
+                                    <p class="card-text text-dark">Category: {{ $book->category }}</p>
+                                    <div class="d-flex w-100 justify-content-end">
+                                        @if (View::getSection('title') == 'Update Book')
+                                            <a href="{{ route('editBook', $book->id) }}" class="btn btn-warning"
+                                                data-tip="edit"><i class="fa fa-edit"></i></a>
+                                        @elseif (View::getSection('title') == 'Delete Book')
+                                            <a href="{{ route('deleteDB', $book->id) }}" class="btn btn-danger"
+                                                data-tip="delete"><i class="fa fa-trash"></i></a>
+                                        @elseif (View::getSection('title') == 'Display Book')
+                                            <a href="/display/book/{{ $book->id }}"
+                                                class="btn btn-primary customViewLink">View
+                                                Book</a>
+                                        @endif
+                                    </div>
 
+                                </div>
+                            </div>
 
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>No</th>
-                                <th>Book Title</th>
-                                <th>Author</th>
-                                <th>Page Count</th>
-                                <th>Release Year</th>
-                                <th>Category</th>
-                                {{-- @if (View::getSection('title') == 'Update Book' || View::getSection('title') == 'Delete Book') --}}
-                                <th>Action</th>
-                                {{-- @endif --}}
-                            </tr>
-                        </thead>
+                            @php
+                                $k++;
+                            @endphp
+                        @endforeach
+                    </div>
+                    {{-- <table class="table">
+
                         <tbody>
                             @php
                                 $k = 1;
@@ -67,7 +88,7 @@
                                 @endphp
                             @endforeach
                         </tbody>
-                    </table>
+                    </table> --}}
                 </div>
             </div>
         </div>
