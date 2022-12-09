@@ -39,7 +39,6 @@
                                                 Book</a>
                                         @endif
                                     </div>
-
                                 </div>
                             </div>
 
@@ -48,47 +47,6 @@
                             @endphp
                         @endforeach
                     </div>
-                    {{-- <table class="table">
-
-                        <tbody>
-                            @php
-                                $k = 1;
-                            @endphp
-                            @foreach ($books as $book)
-                                <tr>
-                                    <td>{{ $k }}</td>
-                                    <td>{{ $book->bookTitle }}</td>
-                                    <td>{{ $book->author }}</td>
-                                    <td>{{ $book->pageCount }}</td>
-                                    <td>{{ $book->releaseYear }}</td>
-                                    <td>{{ $book->category }}</td>
-                                    @if (View::getSection('title') == 'Update Book')
-                                        <td>
-                                            <ul class="action-list">
-                                                <li><a href="{{ route('editBook', $book->id) }}" data-tip="edit"><i
-                                                            class="fa fa-edit"></i></a></li>
-                                            </ul>
-                                        </td>
-                                    @elseif (View::getSection('title') == 'Delete Book')
-                                        <td>
-                                            <ul class="action-list">
-                                                <li><a href="{{ route('deleteDB', $book->id) }}" data-tip="delete"><i
-                                                            class="fa fa-trash"></i></a></li>
-                                            </ul>
-                                        </td>
-                                    @elseif (View::getSection('title') == 'Display Book')
-                                        <td>
-                                            <a href="/display/book/{{ $book->id }}" class="customViewLink">View
-                                                Book</a>
-                                        </td>
-                                    @endif
-                                </tr>
-                                @php
-                                    $k++;
-                                @endphp
-                            @endforeach
-                        </tbody>
-                    </table> --}}
                 </div>
             </div>
         </div>
