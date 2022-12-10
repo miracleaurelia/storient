@@ -111,6 +111,9 @@
                         <li class="nav-item">
                             <a class="nav-link " aria-current="page" href="/transaction">Transaction</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href={{Route('logout')}}>Logout</a>
+                        </li>
                     @else
                         <li class="nav-item ">
                             <a class="nav-link navBtnGuestLogin" aria-current="page" href="{{ Route('login') }}">Login</a>

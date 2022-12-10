@@ -9,12 +9,7 @@
                 <h1 class="mb-4">Create your account</h1>
 
                 <div class="card p-3 col-6  registerFormContainer" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
-                    @if (Session::has('success'))
-                        <div class="alert alert-success text-center">
-                            {{ Session::get('success') }}
-                        </div>
-                    @endif
-                    <form action="/register" method="POST">
+                    <form action="" method="POST">
                         @csrf
                         <div class="form-group mb-3">
                             <label for="inputUsername">Username</label>

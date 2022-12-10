@@ -3,6 +3,12 @@
 @section('title', 'Home Page')
 
 @section('content')
+    @if (session()->has('success'))
+        <div class="alert alert-success text-center">
+            {{ session('success') }}
+        </div>
+    @endif
+
     <div id="carouselExampleIndicators" class="carousel slide m" data-bs-ride="carousel" style="padding-top: 88px;">
         <div class="content text-center">
             <h2>WELCOME TO STORIENT</h2>

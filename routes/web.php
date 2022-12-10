@@ -32,11 +32,11 @@ Route::middleware('guest')->group(function () {
     Route::get("/register", function () {
         return view("register");
     })->name('register');
-    
+    Route::post("/register",[AuthController::class,'register']);
 });
 
 Route::middleware('auth')->group(function () {
-    
+    Route::get('/logout',[AuthController::class,'logout'])->name('logout');
 });
 
 Route::get('/create/book',[BookController::class, 'createBook'])->name('createBook');
