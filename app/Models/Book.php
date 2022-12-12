@@ -9,11 +9,5 @@ class Book extends Model
 {
     use HasFactory;
 
-    protected $fillable = [
-        'bookTitle',
-        'author',
-        'pageCount',
-        'releaseYear',
-        'category',
-    ];
+    protected $guarded = ['id'];
 }

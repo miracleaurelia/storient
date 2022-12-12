@@ -7,29 +7,65 @@ use Illuminate\Http\Request;
 
 class BookController extends Controller
 {
+    public function __construct()
+    {
+        $this->bookReq = [
+            'bookTitle' => request()->bookTitle,
+            'author' => request()->author,
+            'pageCount' => request()->pageCount,
+            'releaseYear'=> request()->releaseYear,
+            'category' => request()->category,
+            'description' => request()->description,
+            'price' => request()->price
+        ];
+    }
+
     public function createBook() {
         return view('createBook');
     }
 
+    public function moveImage() {
+        $files = request()->file('image');
+        $fullFileName = $files->getClientOriginalName();
+        $fileName = pathinfo($fullFileName)['filename'];
+        $extension = $files->getClientOriginalExtension();
+        $image = $fileName . "-" . date('YmdHis') . "." . $extension;
+        $files->move(public_path('images'), $image);
+
+        return $image;
+    }
+
     public function storeBook(Request $request) {
-        // if('admin'){}
         $this->validate($request, [
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'bookTitle' => 'required|min:1|max:50',
             'author' => 'required|min:1|max:50',
             'pageCount' => 'required|numeric|min:0|not_in:0',
             'releaseYear'=>'required|numeric',
-            'category' => 'required|max:25'
+            'category' => 'required|max:25',
+            'description' => 'required|min:50',
+            'price' => 'required|integer|gt:0',
+            'preview' => 'required|file|mimes:pdf'
         ]);
 
+        $image = $this->moveImage();
+
+        $preview = time() . '.' . $request->preview->extension();
+        $request->preview->move(public_path('files'), $preview);
+
         Book::create([
+            'image' => $image,
             'bookTitle' => $request->bookTitle,
             'author' => $request->author,
             'pageCount' => $request->pageCount,
             'releaseYear' => $request->releaseYear,
-            'category' => $request->category
+            'category' => $request->category,
+            'description' => $request->description,
+            'price' => $request->price,
+            'preview' => $preview
         ]);
 
-        return back()->with('success', 'Book successfully inserted. Fill the form below to insert another.');
+        return redirect()->route('display')->with('success_message', 'Book inserted successfully');
     }
 
     public function showBook() {
@@ -54,14 +90,30 @@ class BookController extends Controller
 
     public function update(Request $request, $id) {
         $this->validate($request, [
-            'bookTitle' => 'required|min:5|max:40',
-            'author' => 'required|min:5|max:40',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'bookTitle' => 'required|min:1|max:50',
+            'author' => 'required|min:1|max:50',
             'pageCount' => 'required|numeric|min:0|not_in:0',
             'releaseYear'=>'required|numeric',
-            'category' => 'required|max:25'
+            'category' => 'required|max:25',
+            'description' => 'required|min:50',
+            'price' => 'required|integer|gt:0',
+            'preview' => 'nullable|file|mimes:pdf'
         ]);
 
-        $book = Book::find($id)->update($request->all());
+        $book = Book::find($id);
+        $book->update($this->bookReq);
+
+        if ($request->file('image') != null) {
+            $image = $this->moveImage();
+            $book->update(['image' => $image]);
+        }
+
+        if ($request->preview != null) {
+            $preview = time() . '.' . $request->preview->extension();
+            $request->preview->move(public_path('files'), $preview);
+            $book->update(['preview' => $preview]);
+        }
 
         return back()->with('success', 'Data successfully updated!');
     }
@@ -76,11 +128,11 @@ class BookController extends Controller
         $res = Book::find($id)->delete();
 
         if ($res) {
-            return back()->with('msg', 'Data successfully deleted!');
+            return redirect()->route('display')->with('success_message', 'Book inserted successfully');
         }
 
         else {
-            return back()->with('msg', 'No such book data found.');
+            return redirect()->route('display')->with('error_message', 'Something went wrong');
         }
     }
 }

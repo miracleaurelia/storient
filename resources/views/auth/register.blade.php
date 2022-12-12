@@ -1,38 +1,36 @@
 @extends('layouts.app')
 
-@section('title', 'Profile')
+@section('title', 'Register')
 
 @section('content')
+<div class="container pt-120 pb-100">
+    <div class="row">
+        <div class="col-12 d-flex flex-column align-items-center">
+            <h1 class="mb-4">Create your account</h1>
 
-    {{-- @if ('BUKAN MEMBER')
-    <div class="container pt-120">
-        <h1 class="my-4 text-center">You must sign in to edit profile!</h1>
-    </div> --}}
-
-    {{-- @elseif ('MEMBER') --}}
-
-    <div class="container pt-120">
-        <h1 class="my-4 text-center">Edit Profile</h1>
-        <div class="row py-5 mt-4 align-items-center">
-            <div class="col-md-5 m-auto d-flex">
-                <img src="{{ URL::asset('/images/edit_profile.png') }}" alt="" class="m-auto">
-            </div>
-            <div class="col-md-7 p-3 card bg-dark">
-                <form action="/editProfile" method="POST">
+            <div class="card p-3 col-6  registerFormContainer" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;">
+                @if (Session::has('success'))
+                    <div class="alert alert-success text-center">
+                        {{ Session::get('success') }}
+                    </div>
+                @endif
+                <form action="{{ route('register') }}" method="POST">
                     @csrf
                     <div class="form-group mb-3">
-                        <label for="inputUsername" class="text-white">Username</label>
-                        @error('username')
+                        <label for="inputName">Name</label>
+                        @error('name')
                             <div class="text-danger">
                                 {{ $message }}
                             </div>
                         @enderror
-                        <input type="text" name="username" class="form-control @error('username') is-invalid @enderror"
-                            id="inputUsername" aria-describedby="usernameHelp" placeholder="Enter username"
-                            value="{{ $member->username }}">
+
+                        <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
+                            id="inputName" aria-describedby="usernameHelp" placeholder="Enter name"
+                            value="{{ old('name') }}">
+
                     </div>
                     <div class="form-group mb-3">
-                        <label for="inputEmail" class="text-white">Email address</label>
+                        <label for="inputEmail">Email address</label>
                         @error('email')
                             <div class="text-danger">
                                 {{ $message }}
@@ -40,11 +38,12 @@
                         @enderror
                         <input type="text" name="email" class="form-control @error('email') is-invalid @enderror"
                             id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email"
-                            value="{{ $member->email }}">
+                            value="{{ old('email') }}">
+
                     </div>
                     <div class="row">
                         <div class="form-group mb-3 col-6">
-                            <label for="inputPassword" class="text-white">Password</label>
+                            <label for="inputPassword">Password</label>
                             @error('password')
                                 <div class="text-danger">
                                     {{ $message }}
@@ -52,58 +51,65 @@
                             @enderror
                             <input type="password" name="password"
                                 class="form-control @error('password') is-invalid @enderror" id="inputPassword"
-                                placeholder="Password" value="{{ $member->password }}">
+                                placeholder="Password" value="{{ old('password') }}">
                         </div>
                         <div class="form-group mb-3 col-6">
-                            <label for="inputConfirm" class="text-white">Confirm Password</label>
+                            <label for="inputConfirm">Confirm Password</label>
                             @error('password_confirmation')
                                 <div class="text-danger">
                                     {{ $message }}
                                 </div>
                             @enderror
                             <input type="password" name="password_confirmation"
-                                class="form-control @error('password_confirmation') is-invalid @enderror" id="inputConfirm"
-                                placeholder="Confirmation Password" value="">
+                                class="form-control @error('password_confirmation') is-invalid @enderror"
+                                id="inputConfirm" placeholder="Confirmation Password"
+                                value="{{ old('password_confirmation') }}">
+
                         </div>
                     </div>
+
                     <div class="form-group mb-3">
-                        <label for="inputPhoneNumber" class="text-white">Phone Number</label>
+                        <label for="inputPhoneNumber">Phone Number</label>
                         @error('phoneNumber')
                             <div class="text-danger">
                                 {{ $message }}
                             </div>
                         @enderror
-                        <input type="text" name="phoneNumber"
-                            class="form-control @error('phoneNumber') is-invalid @enderror" id="inputPhoneNumber"
-                            placeholder="Phone Number" value="{{ $member->phoneNumber }}">
+                        <input type="text" name="phoneNumber" class="form-control @error('phoneNumber') is-invalid @enderror"
+                            id="inputPhoneNumber" placeholder="Phone Number" value="{{ old('phoneNumber') }}">
                     </div>
                     <div class="form-group mb-3">
-                        <label for="inputKTP" class="text-white">KTP No.</label>
+                        <label for="inputKTP">KTP No.</label>
                         @error('ktp')
                             <div class="text-danger">
                                 {{ $message }}
                             </div>
                         @enderror
                         <input type="text" name="ktp" class="form-control @error('ktp') is-invalid @enderror"
-                            id="inputKTP" placeholder="KTP" value="{{ $member->KTP }}">
+                            id="inputKTP" placeholder="KTP" value="{{ old('ktp') }}">
                     </div>
                     <div class="form-group mb-3">
-                        <label for="inputAddress" class="text-white">Address</label>
+                        <label for="inputAddress">Address</label>
                         @error('address')
                             <div class="text-danger">
                                 {{ $message }}
                             </div>
                         @enderror
-                        <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="inputAddress" rows="3">{{ $member->address }}</textarea>
+                        <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="inputAddress" rows="3">{{ old('address') }}</textarea>
+
                     </div>
-                    <div class="d-flex align-items-center justify-content-between">
-                        <button type="submit" class="btn-default">Save</button>
-                        <a href="/profile"><button type="button" class="btn-alternate">Cancel</button></a>
+
+                    <div class="">
+                        <button type="submit" class="btn btnRegisterForm">Create Account</button>
+                        <p class="haveAccount">Already have an account? <a href="/login">Sign In</a></p>
                     </div>
+
+
                 </form>
             </div>
-        </div>
-    </div>
 
-    {{-- @endif --}}
+        </div>
+
+    </div>
+</div>
 @endsection

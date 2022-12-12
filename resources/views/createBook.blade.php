@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('title', 'Insert Book')
 
@@ -6,21 +6,21 @@
     <div class="container pt-120">
         <h1 class="my-4 text-center">Insert <span class="text-custom">Book</span></h1>
         <div class="row py-5 mt-4 align-items-center">
-            <div class="col-md-5 pr-lg-5 mb-5 mb-md-0 bookForm-img">
+            <div class="col-md-4 pr-lg-5 mb-5 mb-md-0 bookForm-img">
                 <img src="{{ URL::asset('/images/insert.png') }}" alt="">
             </div>
-            <div class="col-md-7 ml-auto">
+            <div class="col-md-6 ml-auto">
                 <div class="book-a book-card">
                     @if (Session::has('success'))
                         <div class="alert alert-success text-center">
                             {{ Session::get('success') }}
                         </div>
                     @endif
-                    <form action="{{ route('storeBook') }}" method="POST" id="form" class="book-form">
+                    <form action="{{ route('storeBook') }}" method="POST" id="form" class="book-form" enctype="multipart/form-data">
                         @csrf
                         <div class="book-form-field">
                             <input type="text" class="book-input @error('bookTitle') is-invalid @enderror" id="bookTitle"
-                                name="bookTitle" placeholder="Book Title">
+                                name="bookTitle" placeholder="Book Title" value="{{ old('bookTitle') }}">
                             <label for="bookTitle"><i class="fas fa-book"></i></label>
 
                             @error('bookTitle')
@@ -31,7 +31,7 @@
                         </div>
                         <div class="book-form-field">
                             <input type="text" class="book-input @error('author') is-invalid @enderror" id="author"
-                                name="author" placeholder="Book Author">
+                                name="author" placeholder="Book Author" value="{{ old('author') }}">
                             <label for="author"><i class="fas fa-user"></i></label>
 
                             @error('author')
@@ -42,7 +42,7 @@
                         </div>
                         <div class="book-form-field">
                             <input type="number" class="book-input @error('pageCount') is-invalid @enderror" id="pageCount"
-                                name="pageCount" placeholder="Book's Page Count">
+                                name="pageCount" placeholder="Book's Page Count" value="{{ old('pageCount') }}">
                             <label for="pageCount"><i class="fas fa-sort-numeric-up"></i></label>
 
                             @error('pageCount')
@@ -53,7 +53,7 @@
                         </div>
                         <div class="book-form-field">
                             <input type="number" class="book-input @error('releaseYear') is-invalid @enderror"
-                                id="releaseYear" name="releaseYear" placeholder="Book's Release Year">
+                                id="releaseYear" name="releaseYear" placeholder="Book's Release Year" value="{{ old('releaseYear') }}">
                             <label for="releaseYear"><i class="fas fa-calendar-alt"></i></label>
 
                             @error('releaseYear')
@@ -64,7 +64,7 @@
                         </div>
                         <div class="book-form-field">
                             <input type="text" class="book-input @error('category') is-invalid @enderror" id="category"
-                                name="category" placeholder="Book's Category">
+                                name="category" placeholder="Book's Category" value="{{ old('category') }}">
                             <label for="category"><i class="fas fa-th-large"></i></label>
 
                             @error('category')
@@ -75,7 +75,7 @@
                         </div>
                         <div class="book-form-field">
                             <input type="text" class="book-input @error('price') is-invalid @enderror" id="price"
-                                name="price" placeholder="Book's Price">
+                                name="price" placeholder="Book's Price" value="{{ old('price') }}">
                             <label for="price"><i class="fas fa-solid fa-dollar-sign"></i></label>
 
                             @error('price')
@@ -86,7 +86,7 @@
                         </div>
                         <div class="book-form-field">
                             <input type="text" class="book-input @error('description') is-invalid @enderror"
-                                id="description" name="description" placeholder="Book's Description">
+                                id="description" name="description" placeholder="Book's Description" value="{{ old('description') }}">
                             <label for="description"><i class="fas fa-regular fa-comment-dots"></i></label>
 
                             @error('description')
@@ -97,7 +97,7 @@
                         </div>
                         <div class="book-form-field">
                             <input type="file" class="pt-2 book-input @error('image') is-invalid @enderror"
-                                name="image" id="image" placeholder="Book's Image">
+                                name="image" id="image" placeholder="Book's Image" value="{{ old('image') }}">
                             <label for="image"><i class="fas fa-regular fa-image"></i></label>
 
                             @error('image')
@@ -108,7 +108,7 @@
                         </div>
                         <div class="book-form-field">
                             <input type="file" class="pt-2 book-input @error('preview') is-invalid @enderror"
-                                name="preview" id="preview" placeholder="Book's Preview">
+                                name="preview" id="preview" placeholder="Book's Preview" value="{{ old('preview') }}">
                             <label for="preview"><i class="fas fa-solid fa-file"></i></label>
 
                             @error('preview')

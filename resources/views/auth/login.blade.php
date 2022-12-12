@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('title', 'Login')
 
@@ -19,7 +19,7 @@
                             {{ session('error') }}
                         </div>
                     @endif
-                    <form action="{{ Route('loginUser') }}" method="POST">
+                    <form action="{{ Route('login') }}" method="POST">
                         @csrf
                         <div class="form-group mb-3">
                             <label for="exampleInputEmail1">Email address</label>
