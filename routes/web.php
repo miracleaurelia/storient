@@ -21,9 +21,6 @@ use Facade\FlareClient\View;
 
 Route::get('/',[HomeController::class, 'index'])->name('home');
 
-Route::get('/display/book',[BookController::class, 'showBook'])->name('display');
-
-
 Route::middleware('guest')->group(function () {
     Route::get("/login", function () {
         return view("login");
@@ -48,9 +45,11 @@ Route::post(
 )->name('storeBook');
 
 Route::get(
-    'show/book',
-    [BookController::class, 'showBook']
-)->name('showBook');
+    '/display/book/{id}',
+    [BookController::class, 'showBookDetail']
+)->name('showBookDetail');
+
+Route::get('/display/book',[BookController::class, 'showBook'])->name('display');
 
 Route::get(
     'updateView/book',
