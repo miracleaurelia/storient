@@ -3,6 +3,7 @@
 
 use App\Http\Controllers\AuthController;
 
+use App\Http\Controllers\CartController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
@@ -77,4 +78,8 @@ Route::group(['middleware' => 'AdminRole'], function () {
 
 Route::group(['middleware' => 'MemberRole'], function () {
     //
+    Route::get(
+        'cart',
+        [CartController::class, 'index']
+    )->name('memberCart');
 });
