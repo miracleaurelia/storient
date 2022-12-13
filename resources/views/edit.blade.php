@@ -1,4 +1,4 @@
-@extends('layouts.master')
+@extends('layouts.app')
 
 @section('title', 'Edit Book Form')
 
@@ -6,17 +6,17 @@
     <div class="container pt-120">
         <h1 class="my-4 text-center">Enter Edit Book <span class="text-custom">Details</span></h1>
         <div class="row py-5 mt-4 align-items-center">
-            <div class="col-md-5 pr-lg-5 mb-5 mb-md-0 bookForm-img">
+            <div class="col-md-4 pr-lg-5 mb-5 mb-md-0 bookForm-img">
                 <img src="{{ URL::asset('/images/edit.png') }}" alt="">
             </div>
-            <div class="col-md-7 ml-auto">
+            <div class="col-md-6 ml-auto">
                 <div class="book-a book-card">
                     @if (Session::has('success'))
                         <div class="alert alert-success text-center">
                             {{ Session::get('success') }}
                         </div>
                     @endif
-                    <form action="{{ route('updateBook', $book->id) }}" method="POST" id="form" class="book-form">
+                    <form action="{{ route('updateBook', $book->id) }}" method="POST" id="form" class="book-form" enctype="multipart/form-data">
                         @csrf
                         <div class="book-form-field">
                             <input type="text" class="book-input @error('bookTitle') is-invalid @enderror" id="bookTitle"
@@ -76,7 +76,7 @@
                         </div>
                         <div class="book-form-field">
                             <input type="text" class="book-input @error('price') is-invalid @enderror" id="price"
-                                name="price" placeholder="Book's Price">
+                                name="price" placeholder="Book's Price" value="{{ $book->price }}">
                             <label for="price"><i class="fas fa-solid fa-dollar-sign"></i></label>
 
                             @error('price')
@@ -87,7 +87,7 @@
                         </div>
                         <div class="book-form-field">
                             <input type="text" class="book-input @error('description') is-invalid @enderror"
-                                id="description" name="description" placeholder="Book's Description">
+                                id="description" name="description" placeholder="Book's Description" value="{{ $book->description }}">
                             <label for="description"><i class="fas fa-regular fa-comment-dots"></i></label>
 
                             @error('description')

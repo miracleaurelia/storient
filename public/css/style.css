@@ -620,3 +620,23 @@ img {
 }
 
 /* End of book details */
+
+.item-cover img {
+    height: 400px;
+    width: auto;
+    max-width: 100%;
+    object-fit: cover;
+}
+
+.card-body {
+    min-height: 200px;
+}
+
+.book-cover img {
+    max-height: 95vh;
+    max-width: 100%;
+}
+
+.text-justify {
+    text-align: justify;
+}
