@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
 use Facade\FlareClient\View;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +24,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/',[HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/display/book',[BookController::class, 'showBook'])->name('display');
+Route::get('/display/book', [BookController::class, 'showBook'])->name('display');
 
 Route::get(
     '/display/book/{id}',
@@ -47,7 +48,7 @@ Route::get(
 // });
 
 Route::group(['middleware' => 'AdminRole'], function () {
-    Route::get('/create/book',[BookController::class, 'createBook'])->name('createBook');
+    Route::get('/create/book', [BookController::class, 'createBook'])->name('createBook');
     Route::post(
         '/store/book',
         [BookController::class, 'storeBook']
