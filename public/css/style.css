@@ -1,10 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
 
 :root {
-    --black: #191919;
-    --blue: #2d4263;
-    --red: #c84b31;
-    --linen: #ecdbba;
+    --orange: #faab78;
+    --lightGreen: #e8f3d6;
+    --lightYellow: #fcf9be;
+    --lightOrange: #ffdca9;
+    --darkOrange: #d29943;
+    --darkGreen: #acca7b;
 }
 * {
     margin: 0;
@@ -16,21 +18,23 @@
     scroll-behavior: smooth;
 }
 body {
-    background-color: var(--black) !important;
+    background-color: var(--orange) !important;
 }
 p {
-    color: white;
+    color: black;
 }
 /* navbar */
 nav.navbar {
-    background-color: var(--black);
+    background-color: var(--orange);
 }
 .navbar-brand img {
     /* height: 55px; */
     max-width: 100px;
     max-height: 50px;
 }
-
+#carouselExampleIndicators {
+    background-color: black;
+}
 .greetings {
     color: white;
     margin: 0;
@@ -46,13 +50,13 @@ nav.navbar {
     line-height: 50px;
     transition: all 0.5s;
     z-index: 1;
-    background-image: linear-gradient(315deg, white 0%, var(--linen) 70%);
+    background-image: linear-gradient(315deg, white 0%, var(--lightOrange) 70%);
 }
 .navBtnGuestLogin {
     border-radius: 15px;
     color: black !important;
-    border: 2px solid var(--linen);
-    background-color: var(--linen);
+    border: 2px solid var(--lightGreen);
+    background-color: var(--lightGreen);
     margin-bottom: 10px;
     margin-right: 10px;
     padding: 0.5em 0.8em !important;
@@ -62,20 +66,24 @@ nav.navbar {
     margin-right: 10px;
     margin-bottom: 10px;
     border-radius: 15px;
-    color: var(--linen) !important;
-    border: 2px solid var(--linen);
+    color: var(--lightGreen) !important;
+    border: 2px solid var(--lightGreen);
     padding: 0.5em 0.8em !important;
     width: fit-content;
+}
+
+.nav-item .nav-link {
+    color: var(--lightGreen);
 }
 /* end of navbar */
 
 /* start of hero section */
 h1 {
-    color: var(--linen);
+    color: black;
 }
 
 .text-custom {
-    color: var(--linen);
+    color: black;
 }
 
 .carousel {
@@ -100,9 +108,9 @@ h1 {
 
 .content h2 {
     text-align: center;
-    color: white;
+    color: var(--lightOrange);
     letter-spacing: 0.5rem;
-    text-shadow: 2px 2px 2px var(--black);
+    text-shadow: 2px 2px 2px var(--orange);
 }
 /* end of hero section */
 
@@ -113,18 +121,18 @@ h1 {
 }
 
 .services:nth-child(3n + 1) .card {
-    background: #67676a !important;
-    color: #fff;
+    background: #fcf9be !important;
+    color: rgb(0, 0, 0);
 }
 
 .services:nth-child(3n + 2) .card {
-    background: #2e2e38 !important;
-    color: #fff;
+    background: #fff990 !important;
+    color: rgb(0, 0, 0);
 }
 
 .services:nth-child(3n) .card {
-    background: #000000 !important;
-    color: #fff;
+    background: #fff86a !important;
+    color: rgb(0, 0, 0);
 }
 
 .awards-section {
@@ -134,7 +142,7 @@ h1 {
 
 .awards-item {
     position: relative;
-    background-color: #000000;
+    background-color: #fcf9be;
     padding: 25px;
     border-radius: 10px;
     overflow: hidden;
@@ -172,7 +180,7 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(315deg, var(--linen) 0%, white 74%);
+    background-image: linear-gradient(315deg, var(--lightOrange) 0%, white 74%);
     z-index: -1;
     -ms-transform: translate(-100%, -100%);
     -webkit-transform: translate(-100%, -100%);
@@ -187,18 +195,18 @@ img {
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(315deg, white 0%, var(--linen) 74%);
+    background-image: linear-gradient(315deg, white 0%, var(--lightOrange) 74%);
     z-index: -1;
     -ms-transform: translate(100%, 100%);
     -webkit-transform: translate(100%, 100%);
     transform: translate(100%, 100%);
     transition: all 0.5s;
 }
-.awards-item:hover .title {
+.awards-item .title {
     color: black;
 }
-.awards-item:hover p {
-    color: black;
+.awards-item p {
+    color: black !important;
 }
 .awards-item:hover::before {
     -ms-transform: translate(0%, 0%);
@@ -213,7 +221,7 @@ img {
 }
 
 .awards-item:hover .awards-icon {
-    background-image: linear-gradient(315deg, var(--linen) 0%, white 74%);
+    background-image: linear-gradient(315deg, var(--lightOrange) 0%, white 74%);
 }
 
 .awards-icon img {
@@ -222,7 +230,7 @@ img {
 }
 
 .awards-content .title {
-    color: var(--linen);
+    color: black;
     margin-bottom: 10px;
 }
 
@@ -264,7 +272,7 @@ img {
 
 .awards-item h3,
 .awards-item p {
-    color: white;
+    color: black;
 }
 /* end of about us section */
 
@@ -273,7 +281,7 @@ img {
     padding: 0.5rem 1.5rem;
     border-radius: 10px;
     border: none;
-    color: white;
+    color: black;
     background-color: red;
     cursor: pointer;
 }
@@ -301,13 +309,13 @@ img {
 .btnBookLink {
     margin-top: 20px;
     margin-bottom: 20px;
-    color: var(--linen) !important;
+    color: var(--lightGreen) !important;
     background: none !important;
-    border: 2px solid var(--linen) !important;
+    border: 2px solid var(--lightGreen) !important;
 }
 .btnBookLink.active {
     color: black !important;
-    background: var(--linen) !important;
+    background: var(--lightGreen) !important;
 }
 .table-list .table-list-body .table {
     margin-bottom: 0;
@@ -374,16 +382,20 @@ img {
     background-color: rgba(255, 255, 255, 0.2);
 }
 .customViewLink {
-    color: var(--linen);
+    color: white;
 }
-.customViewLink:hover {
-    color: var(--linen);
-}
+/* .customViewLink:hover {
+    color: var(--lightOrange);
+} */
 /* end of book collection */
 
 /* footer section */
 .footer-section {
-    background-image: linear-gradient(180deg, #28313b 30%, #485461 100%);
+    background-image: linear-gradient(
+        180deg,
+        var(--orange) 30%,
+        var(--lightOrange) 100%
+    );
 }
 
 .footer-section {
@@ -396,7 +408,7 @@ img {
 }
 
 .copyright-content p {
-    color: white;
+    color: black;
 }
 
 .blog-social li {
@@ -420,7 +432,11 @@ img {
 .blog-social li a:hover,
 .blog-social li a.active {
     color: #fff;
-    background-image: linear-gradient(315deg, #000000 0%, #2c3e50 70%);
+    background-image: linear-gradient(
+        315deg,
+        var(--lightGreen) 0%,
+        var(--darkGreen) 70%
+    );
     border: 1px solid transparent;
 }
 
@@ -431,7 +447,11 @@ img {
 
 /* Insert Book page */
 .book-card {
-    background: linear-gradient(159deg, #2d2d3a 0%, #2b2b35 100%);
+    background: linear-gradient(
+        159deg,
+        var(--lightGreen) 0%,
+        var(--lightGreen) 100%
+    );
     -webkit-box-shadow: 0 3px 8px 0 rgba(15, 15, 20, 0.2);
     box-shadow: 0 3px 8px 0 rgba(15, 15, 20, 0.2);
     padding: 30px;
@@ -458,7 +478,7 @@ img {
 .book-form-field textarea {
     height: 50px;
     width: 100%;
-    background: linear-gradient(159deg, #252532 0%, #23232d 100%);
+    background: linear-gradient(159deg, white 0%, white 100%);
     border: none;
     color: #fafafc;
     padding-left: 65px;
@@ -466,6 +486,7 @@ img {
     box-shadow: inset 0 1px 4px 0 rgb(15 15 20 / 10%);
     margin-bottom: 0;
     transition: 0.4s ease-in-out;
+    color: black;
 }
 
 .book-form label {
@@ -474,7 +495,7 @@ img {
     position: absolute;
     height: 50px;
     width: 50px;
-    background: #20202a;
+    background: var(--lightGreen);
     top: 0;
     left: 0;
     padding: 0 15px;
@@ -491,7 +512,7 @@ img {
     padding-left: 15px;
     padding-top: 15px;
     height: 150px;
-    border-left: solid 50px #20202a;
+    border-left: solid 50px var(--darkGreen);
 }
 
 .bookForm-img,
@@ -532,7 +553,7 @@ img {
     line-height: 50px;
     transition: all 0.5s;
     z-index: 1;
-    background-image: white;
+    background-color: var(--darkGreen);
     border: none;
     outline: none;
     cursor: pointer;
@@ -550,7 +571,7 @@ img {
 }
 
 .book-form .book-input:focus + label {
-    background: #67676a;
+    background: var(--darkGreen);
     color: #20202a;
 }
 
@@ -561,60 +582,60 @@ img {
 
 /* Start of login */
 .loginFormContainer {
-    border: 10px solid var(--linen);
-    background-color: #363636 !important;
+    border: 10px solid var(--lightGreen);
+    background-color: var(--lightGreen) !important;
 }
 .loginFormContainer label {
-    color: white;
+    color: black;
 }
 .btnLoginForm {
     color: black !important;
-    background: var(--linen) !important;
+    background: var(--lightOrange) !important;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 .dontHaveAccount a {
-    color: var(--linen);
+    color: var(--darkOrange);
 }
 /* End of login */
 
 /* Start of register */
 .registerFormContainer {
-    border: 10px solid var(--linen);
-    background-color: #363636 !important;
+    border: 10px solid var(--lightGreen);
+    background-color: var(--lightGreen) !important;
 }
 .registerFormContainer label {
-    color: white;
+    color: black;
 }
 .btnRegisterForm {
     color: black !important;
-    background: var(--linen) !important;
+    background: var(--lightOrange) !important;
     margin-top: 20px;
     margin-bottom: 20px;
 }
 .haveAccount a {
-    color: var(--linen);
+    color: var(--darkOrange);
 }
 
 /* End of register */
 
 /* Start of book details */
-.btn-default{
+.btn-default {
     padding: 10px 25px;
     text-align: center;
     color: black;
     border-radius: 10px;
-    border: 1px solid var(--linen);
+    border: 1px solid var(--lightOrange);
     font-weight: 500;
-    background-image: linear-gradient(315deg, white 0%, var(--linen) 70%);
+    background-image: linear-gradient(315deg, white 0%, var(--lightGreen) 70%);
 }
 
-.btn-alternate{
+.btn-alternate {
     padding: 10px 25px;
     text-align: center;
-    color: var(--linen);
+    color: var(--lightGreen);
     border-radius: 10px;
-    border: 1px solid var(--linen);
+    border: 1px solid var(--lightGreen);
     font-weight: 500;
     background: transparent;
 }
