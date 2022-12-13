@@ -16,107 +16,139 @@
                             {{ Session::get('success') }}
                         </div>
                     @endif
-                    <form action="{{ route('updateBook', $book->id) }}" method="POST" id="form" class="book-form" enctype="multipart/form-data">
+                    <form action="{{ route('updateBook', $book->id) }}" method="POST" id="form" class="book-form"
+                        enctype="multipart/form-data">
                         @csrf
-                        <div class="book-form-field">
-                            <input type="text" class="book-input @error('bookTitle') is-invalid @enderror" id="bookTitle"
-                                name="bookTitle" placeholder="Book Title" value="{{ $book->bookTitle }}">
-                            <label for="bookTitle"><i class="fas fa-book"></i></label>
 
-                            @error('bookTitle')
-                                <span class="invalid-feedback" role="alert">
-                                    <h5 class="error">Title must be filled & between 1-50 characters</h5>
-                                </span>
-                            @enderror
+                        <div class="book-form-main-field-container">
+                            <label class="main-field-label" for="bookTitle">Book Title</label>
+                            <div class="book-form-field">
+                                <input type="text" class="book-input @error('bookTitle') is-invalid @enderror"
+                                    id="bookTitle" name="bookTitle" placeholder="Book Title" value="{{ $book->bookTitle }}">
+                                <label for="bookTitle"><i class="fas fa-book"></i></label>
+
+                                @error('bookTitle')
+                                    <span class="invalid-feedback" role="alert">
+                                        <h5 class="error">Title must be filled & between 1-50 characters</h5>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="book-form-field">
-                            <input type="text" class="book-input @error('author') is-invalid @enderror" id="author"
-                                name="author" placeholder="Book Author" value="{{ $book->author }}">
-                            <label for="author"><i class="fas fa-user"></i></label>
+                        <div class="book-form-main-field-container">
+                            <label class="main-field-label" for="author">Book Author</label>
+                            <div class="book-form-field">
+                                <input type="text" class="book-input @error('author') is-invalid @enderror"
+                                    id="author" name="author" placeholder="Book Author" value="{{ $book->author }}">
+                                <label for="author"><i class="fas fa-user"></i></label>
 
-                            @error('author')
-                                <span class="invalid-feedback" role="alert">
-                                    <h5 class="error">Author's name must be filled & between 1-50 characters</h5>
-                                </span>
-                            @enderror
+                                @error('author')
+                                    <span class="invalid-feedback" role="alert">
+                                        <h5 class="error">Author's name must be filled & between 1-50 characters</h5>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="book-form-field">
-                            <input type="number" class="book-input @error('pageCount') is-invalid @enderror" id="pageCount"
-                                name="pageCount" placeholder="Book's Page Count" value="{{ $book->pageCount }}">
-                            <label for="pageCount"><i class="fas fa-sort-numeric-up"></i></label>
+                        <div class="book-form-main-field-container">
+                            <label class="main-field-label" for="pageCount">Book's Page Count</label>
+                            <div class="book-form-field">
+                                <input type="number" class="book-input @error('pageCount') is-invalid @enderror"
+                                    id="pageCount" name="pageCount" placeholder="Book's Page Count"
+                                    value="{{ $book->pageCount }}">
+                                <label for="pageCount"><i class="fas fa-sort-numeric-up"></i></label>
 
-                            @error('pageCount')
-                                <span class="invalid-feedback" role="alert">
-                                    <h5 class="error">Page count must be filled & greater than 0</h5>
-                                </span>
-                            @enderror
+                                @error('pageCount')
+                                    <span class="invalid-feedback" role="alert">
+                                        <h5 class="error">Page count must be filled & greater than 0</h5>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="book-form-field">
-                            <input type="number" class="book-input @error('releaseYear') is-invalid @enderror"
-                                id="releaseYear" name="releaseYear" placeholder="Book's Release Year"
-                                value="{{ $book->releaseYear }}">
-                            <label for="releaseYear"><i class="fas fa-calendar-alt"></i></label>
+                        <div class="book-form-main-field-container">
+                            <label class="main-field-label" for="releaseYear">Book's Release Year</label>
+                            <div class="book-form-field">
+                                <input type="number" class="book-input @error('releaseYear') is-invalid @enderror"
+                                    id="releaseYear" name="releaseYear" placeholder="Book's Release Year"
+                                    value="{{ $book->releaseYear }}">
+                                <label for="releaseYear"><i class="fas fa-calendar-alt"></i></label>
 
-                            @error('releaseYear')
-                                <span class="invalid-feedback" role="alert">
-                                    <h5 class="error">Release Year must be filled</h5>
-                                </span>
-                            @enderror
+                                @error('releaseYear')
+                                    <span class="invalid-feedback" role="alert">
+                                        <h5 class="error">Release Year must be filled</h5>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="book-form-field">
-                            <input type="text" class="book-input @error('category') is-invalid @enderror" id="category"
-                                name="category" placeholder="Book's Category" value="{{ $book->category }}">
-                            <label for="category"><i class="fas fa-th-large"></i></label>
+                        <div class="book-form-main-field-container">
+                            <label class="main-field-label" for="category">Book's Category</label>
+                            <div class="book-form-field">
+                                <input type="text" class="book-input @error('category') is-invalid @enderror"
+                                    id="category" name="category" placeholder="Book's Category"
+                                    value="{{ $book->category }}">
+                                <label for="category"><i class="fas fa-th-large"></i></label>
 
-                            @error('category')
-                                <span class="invalid-feedback" role="alert">
-                                    <h5 class="error">Category must be filled & is less than 25 characters</h5>
-                                </span>
-                            @enderror
+                                @error('category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <h5 class="error">Category must be filled & is less than 25 characters</h5>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="book-form-field">
-                            <input type="text" class="book-input @error('price') is-invalid @enderror" id="price"
-                                name="price" placeholder="Book's Price" value="{{ $book->price }}">
-                            <label for="price"><i class="fas fa-solid fa-dollar-sign"></i></label>
+                        <div class="book-form-main-field-container">
+                            <label class="main-field-label" for="price">Book's Price</label>
+                            <div class="book-form-field">
+                                <input type="text" class="book-input @error('price') is-invalid @enderror" id="price"
+                                    name="price" placeholder="Book's Price" value="{{ $book->price }}">
+                                <label for="price"><i class="fas fa-solid fa-dollar-sign"></i></label>
 
-                            @error('price')
-                                <span class="invalid-feedback" role="alert">
-                                    <h5 class="error">Price must be filled </h5>
-                                </span>
-                            @enderror
+                                @error('price')
+                                    <span class="invalid-feedback" role="alert">
+                                        <h5 class="error">Price must be filled </h5>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="book-form-field">
-                            <input type="text" class="book-input @error('description') is-invalid @enderror"
-                                id="description" name="description" placeholder="Book's Description" value="{{ $book->description }}">
-                            <label for="description"><i class="fas fa-regular fa-comment-dots"></i></label>
+                        <div class="book-form-main-field-container">
+                            <label class="main-field-label" for="description">Book's Description</label>
+                            <div class="book-form-field">
+                                <input type="text" class="book-input @error('description') is-invalid @enderror"
+                                    id="description" name="description" placeholder="Book's Description"
+                                    value="{{ $book->description }}">
+                                <label for="description"><i class="fas fa-regular fa-comment-dots"></i></label>
 
-                            @error('description')
-                                <span class="invalid-feedback" role="alert">
-                                    <h5 class="error">Description must be filled </h5>
-                                </span>
-                            @enderror
+                                @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <h5 class="error">Description must be filled </h5>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="book-form-field">
-                            <input type="file" class="pt-2 book-input @error('image') is-invalid @enderror"
-                                name="image" id="image" placeholder="Book's Image">
-                            <label for="image"><i class="fas fa-regular fa-image"></i></label>
+                        <div class="book-form-main-field-container">
+                            <label class="main-field-label" for="image">Book's Image</label>
+                            <div class="book-form-field">
+                                <input type="file" class="pt-2 book-input @error('image') is-invalid @enderror"
+                                    name="image" id="image" placeholder="Book's Image">
+                                <label for="image"><i class="fas fa-regular fa-image"></i></label>
 
-                            @error('image')
-                                <span class="invalid-feedback" role="alert">
-                                    <h5 class="error">Image must be filled </h5>
-                                </span>
-                            @enderror
+                                @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <h5 class="error">Image must be filled </h5>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                        <div class="book-form-field">
-                            <input type="file" class="pt-2 book-input @error('preview') is-invalid @enderror"
-                                name="preview" id="preview" placeholder="Book's Preview">
-                            <label for="preview"><i class="fas fa-solid fa-file"></i></label>
+                        <div class="book-form-main-field-container">
+                            <label class="main-field-label" for="preview">Book's Preview</label>
+                            <div class="book-form-field">
+                                <input type="file" class="pt-2 book-input @error('preview') is-invalid @enderror"
+                                    name="preview" id="preview" placeholder="Book's Preview">
+                                <label for="preview"><i class="fas fa-solid fa-file"></i></label>
 
-                            @error('preview')
-                                <span class="invalid-feedback" role="alert">
-                                    <h5 class="error">Preview must be filled </h5>
-                                </span>
-                            @enderror
+                                @error('preview')
+                                    <span class="invalid-feedback" role="alert">
+                                        <h5 class="error">Preview must be filled </h5>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
                         <div class="book-submit-frame d-flex justify-content-between">
                             <a class="submit-btn bg-danger" href="/updateView/book">Cancel</a>
