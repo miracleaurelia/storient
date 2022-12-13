@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BookController extends Controller
 {
@@ -69,6 +70,9 @@ class BookController extends Controller
     }
 
     public function showBook() {
+        if (!Auth::check()) {
+            return redirect('/login')->with('error_message', 'Please login first');
+        }
         $books = Book::all();
         return view('displayBook', compact('books'));
     }

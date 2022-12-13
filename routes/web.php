@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
 use Facade\FlareClient\View;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
