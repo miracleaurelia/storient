@@ -106,7 +106,11 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link " aria-current="page" href="/transaction">Transaction</a>
+                                <a class="nav-link " aria-current="page" href="/transactions">Transaction</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/adminTransactions">Transaction</a>
                             </li>
                         @endif
 
