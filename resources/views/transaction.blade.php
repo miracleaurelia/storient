@@ -10,14 +10,13 @@
             </div> --}}
 
         {{-- @elseif ('MEMBER') --}}
-            {{-- <h1 class="my-4 text-center">My Transactions</h1>
-            @include('partials.memberTransaction'); --}}
-
-        {{-- @elseif ('ADMIN') --}}
-            <h1 class="my-4 text-center">All Member Transactions</h1>
-            @include('partials.adminTransaction');
-
-        {{-- @endif --}}
+        @if (Auth::user()->isAdmin == 0)
+            {{-- <h1 class="my-4 text-center">My Transactions</h1> --}}
+            @include('partials.memberTransaction')
+        @elseif (Auth::user()->isAdmin == 1)
+            {{-- <h1 class="my-4 text-center">All Member Transactions</h1> --}}
+            @include('partials.adminTransaction')
+        @endif
     </div>
 
 @endsection
