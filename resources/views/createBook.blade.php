@@ -28,7 +28,7 @@
 
                                 @error('bookTitle')
                                     <span class="invalid-feedback" role="alert">
-                                        <h5 class="error">Title must be filled & between 1-50 characters</h5>
+                                        <h5 class="error">{{$message}}</h5>
                                     </span>
                                 @enderror
                             </div>
@@ -42,7 +42,7 @@
 
                                 @error('author')
                                     <span class="invalid-feedback" role="alert">
-                                        <h5 class="error">Author's name must be filled & between 1-50 characters</h5>
+                                        <h5 class="error">{{$message}}</h5>
                                     </span>
                                 @enderror
                             </div>
@@ -57,7 +57,7 @@
 
                                 @error('pageCount')
                                     <span class="invalid-feedback" role="alert">
-                                        <h5 class="error">Page count must be filled & greater than 0</h5>
+                                        <h5 class="error">{{$message}}</h5>
                                     </span>
                                 @enderror
                             </div>
@@ -73,7 +73,7 @@
 
                                 @error('releaseYear')
                                     <span class="invalid-feedback" role="alert">
-                                        <h5 class="error">Release Year must be filled</h5>
+                                        <h5 class="error">{{$message}}</h5>
                                     </span>
                                 @enderror
                             </div>
@@ -89,7 +89,7 @@
 
                                 @error('category')
                                     <span class="invalid-feedback" role="alert">
-                                        <h5 class="error">Category must be filled & is less than 25 characters</h5>
+                                        <h5 class="error">{{$message}}</h5>
                                     </span>
                                 @enderror
                             </div>
@@ -104,7 +104,7 @@
 
                                 @error('price')
                                     <span class="invalid-feedback" role="alert">
-                                        <h5 class="error">Price must be filled </h5>
+                                        <h5 class="error">{{$message}}</h5>
                                     </span>
                                 @enderror
                             </div>
@@ -120,7 +120,7 @@
 
                                 @error('description')
                                     <span class="invalid-feedback" role="alert">
-                                        <h5 class="error">Description must be filled </h5>
+                                        <h5 class="error">{{$message}}</h5>
                                     </span>
                                 @enderror
                             </div>
@@ -136,7 +136,7 @@
 
                                 @error('image')
                                     <span class="invalid-feedback" role="alert">
-                                        <h5 class="error">Image must be filled </h5>
+                                        <h5 class="error">{{$message}}</h5>
                                     </span>
                                 @enderror
                             </div>
@@ -152,7 +152,7 @@
 
                                 @error('preview')
                                     <span class="invalid-feedback" role="alert">
-                                        <h5 class="error">Preview must be filled </h5>
+                                        <h5 class="error">{{$message}}</h5>
                                     </span>
                                 @enderror
                             </div>
