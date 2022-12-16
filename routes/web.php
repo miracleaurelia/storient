@@ -3,6 +3,8 @@
 
 use App\Http\Controllers\AuthController;
 
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
@@ -73,8 +75,30 @@ Route::group(['middleware' => 'AdminRole'], function () {
         'deleteDB/book/{id}',
         [BookController::class, 'deleteDB']
     )->name('deleteDB');
+    Route::get(
+        'adminTransactions',
+        [TransactionController::class, 'getTransactions']
+    )->name('adminTransaction');
+    Route::post(
+        'adminTransactions/{id}',
+        [TransactionController::class, 'verifyTransaction']
+    )->name('verifyTransaction');
 });
 
 Route::group(['middleware' => 'MemberRole'], function () {
     //
+    Route::get(
+        'cart',
+        [CartController::class, 'index']
+    )->name('memberCart');
+
+    Route::post(
+        'cart',
+        [CartController::class, 'checkoutCart']
+    )->name('memberCartCheckout');
+
+    Route::get(
+        'transactions',
+        [TransactionController::class, 'getTransactions']
+    )->name('memberTransaction');
 });

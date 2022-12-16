@@ -39,7 +39,7 @@
         </div>
     </nav> --}}
 
-    <nav class="navbar navbar-expand-md navbar-dark fixed-top p-4 ">
+    <nav class="navbar navbar-expand-md navbar-dark fixed-top p-4">
         <div class="container-fluid">
             <a class="navbar-brand" href="/"><img src="{{ URL::asset('/images/logo.png') }}" alt=""></a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
@@ -102,7 +102,15 @@
 
                         @if (Auth::user()->isAdmin == 0)
                             <li class="nav-item">
-                                <a class="nav-link " aria-current="page" href="/transaction">Transaction</a>
+                                <a class="nav-link " aria-current="page" href="/cart">Cart</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/transactions">Transaction</a>
+                            </li>
+                        @else
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/adminTransactions">Transaction</a>
                             </li>
                         @endif
 
