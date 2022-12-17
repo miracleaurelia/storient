@@ -28,7 +28,7 @@
                         @if (Auth::user()->isAdmin == 0)
                             <div class="row">
                                 <div class="col-md-auto my-2">
-                                    <button class="btn-default">Buy</button>
+                                    <a class="btn-default" href={{route('addToCart',$book->id)}}>Add to cart</a>
                                     <button class="btn-alternate">Rent</button>
                                 </div>
                             </div>

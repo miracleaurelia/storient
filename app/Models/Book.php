@@ -7,7 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Book extends Model
 {
+    protected $primaryKey = "id";
+    protected $fillable = ['image','bookTitle','author','price','description','pageCount','releaseYear','category','preview'];
     use HasFactory;
-
-    protected $guarded = ['id'];
+    public function CartItem(){
+        return $this->belongsTo(CartItem::class);
+    }
 }

@@ -53,23 +53,22 @@ class BookController extends Controller
 
         if($validate){
             $image = $this->moveImage();
-
-        $preview = time() . '.' . $request->preview->extension();
-        $request->preview->move(public_path('files'), $preview);
-
-        Book::create([
-            'image' => $image,
-            'bookTitle' => $request->bookTitle,
-            'author' => $request->author,
-            'pageCount' => $request->pageCount,
-            'releaseYear' => $request->releaseYear,
-            'category' => $request->category,
-            'description' => $request->description,
-            'price' => $request->price,
-            'preview' => $preview
-        ]);
-
-        return redirect()->route('display')->with('success_message', 'Book inserted successfully');
+            
+            $preview = time() . '.' . $request->preview->extension();
+            $request->preview->move(public_path('files'), $preview);
+            
+            Book::create([
+                'image' => $image,
+                'bookTitle' => $request->bookTitle,
+                'author' => $request->author,
+                'pageCount' => $request->pageCount,
+                'releaseYear' => $request->releaseYear,
+                'category' => $request->category,
+                'description' => $request->description,
+                'price' => $request->price,
+                'preview' => $preview
+            ]);
+            return redirect()->route('display')->with(['success_message' => 'Book inserted successfully']);
         }
         
     }

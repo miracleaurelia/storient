@@ -101,4 +101,6 @@ Route::group(['middleware' => 'MemberRole'], function () {
         'transactions',
         [TransactionController::class, 'getTransactions']
     )->name('memberTransaction');
+
+    Route::get('cart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
 });
