@@ -8,7 +8,7 @@
             <h1>My Cart</h1>
         </div>
         <div>
-            @if (count($books) > 0)
+            @if ($carts)
                 <div class="row">
                     <div class="col">
                         <div class="table-list">
@@ -25,22 +25,22 @@
                                         @php
                                             $k = 1;
                                         @endphp
-                                        @foreach ($books as $book)
+                                        @foreach ($carts->CartItem as $book)
                                             <tr>
                                                 <td>{{ $k }}</td>
                                                 <td>
                                                     <div class="row">
                                                         <div class="col-2">
-                                                            <img src="/images/{{ $book->image }}" alt="book cover"
+                                                            <img src="/images/{{ $book->Book->image }}" alt="book cover"
                                                                 style="object-fit: cover">
                                                         </div>
                                                         <div class="col">
                                                             <p class="m-0 fw-bold">{{ $book->bookTitle }}</p>
-                                                            <p class="m-0">by {{ $book->author }}</p>
+                                                            <p class="m-0">by {{ $book->Book->author }}</p>
                                                         </div>
                                                     </div>
                                                 </td>
-                                                <td>Rp{{ $book->price }}</td>
+                                                <td>Rp{{ $book->Book->price }}</td>
                                             </tr>
                                             @php
                                                 $k++;
@@ -48,7 +48,7 @@
                                         @endforeach
                                         <tr>
                                             <td colspan="3" class="text-end table-footer">
-                                                <h5 class="p-0 m-0 fw-bold">Total Price: {{ $books->sum('price') }}</h5>
+                                                <h5 class="p-0 m-0 fw-bold">Total Price: {{ $book->Book->sum('price') }}</h5>
                                             </td>
                                         </tr>
                                     </tbody>

@@ -2,6 +2,9 @@
     <div class="row py-3">
         <h1>Unverified Transactions</h1>
     </div>
+    {{-- @php
+        echo $transactions[0]->TransactionDetail
+    @endphp --}}
     @if (count($transactions) > 0)
         <div class="row">
             <div class="col">
@@ -12,9 +15,10 @@
                                 <tr>
                                     <th>No</th>
                                     <th>Transaction ID</th>
+                                    <th>Customer Name</th>
                                     <th>Products</th>
                                     <th>Total Price</th>
-                                    <th></th>
+                                    <th>Action</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -25,10 +29,14 @@
                                     <tr>
                                         <td>{{ $k }}</td>
                                         <td>{{ $transaction->id }}</td>
-                                        <td>(Array buku)</td>
-                                        {{-- sum of all bought book price --}}
-                                        {{-- <td>Rp{{ $transaction->sum(bookprice) }}</td> --}}
-                                        <td>Rp100000 (ini sum)</td>
+                                        <td>{{ $transaction->User->name }}</td>
+                                        <td>
+                                            @foreach ($transaction->TransactionDetail as $book)
+                                                <p>{{$book->Book->bookTitle}}</p>
+                                            @endforeach
+
+                                        </td>
+                                        <td>{{$transaction->totalPrice}}</td>
                                         <td class="d-flex justify-content-end align-items-center">
                                             <a href="#" class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#paymentProofModal{{ $transaction->id }}">Verify</a>
@@ -50,7 +58,7 @@
                                                 </div>
                                                 <div class="modal-body">
                                                     <img style="object-fit: cover" class="w-100"
-                                                        src='{{ asset('images/' . $transaction->paymentProof) }}' />
+                                                        src='{{ asset('paymentProof/' . $transaction->paymentProof) }}' />
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"

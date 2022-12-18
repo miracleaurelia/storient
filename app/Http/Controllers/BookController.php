@@ -37,36 +37,40 @@ class BookController extends Controller
     }
 
     public function storeBook(Request $request) {
-        $this->validate($request, [
+        $validate = $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'bookTitle' => 'required|min:1|max:50',
             'author' => 'required|min:1|max:50',
             'pageCount' => 'required|numeric|min:0|not_in:0',
             'releaseYear'=>'required|numeric',
             'category' => 'required|max:25',
-            'description' => 'required|min:50',
+            'description' => 'min:50',
             'price' => 'required|integer|gt:0',
             'preview' => 'required|file|mimes:pdf'
+        ],[
+            'min.description'=>'asdasd',
         ]);
 
-        $image = $this->moveImage();
-
-        $preview = time() . '.' . $request->preview->extension();
-        $request->preview->move(public_path('files'), $preview);
-
-        Book::create([
-            'image' => $image,
-            'bookTitle' => $request->bookTitle,
-            'author' => $request->author,
-            'pageCount' => $request->pageCount,
-            'releaseYear' => $request->releaseYear,
-            'category' => $request->category,
-            'description' => $request->description,
-            'price' => $request->price,
-            'preview' => $preview
-        ]);
-
-        return redirect()->route('display')->with('success_message', 'Book inserted successfully');
+        if($validate){
+            $image = $this->moveImage();
+            
+            $preview = time() . '.' . $request->preview->extension();
+            $request->preview->move(public_path('files'), $preview);
+            
+            Book::create([
+                'image' => $image,
+                'bookTitle' => $request->bookTitle,
+                'author' => $request->author,
+                'pageCount' => $request->pageCount,
+                'releaseYear' => $request->releaseYear,
+                'category' => $request->category,
+                'description' => $request->description,
+                'price' => $request->price,
+                'preview' => $preview
+            ]);
+            return redirect()->route('display')->with(['success_message' => 'Book inserted successfully']);
+        }
+        
     }
 
     public function showBook() {
