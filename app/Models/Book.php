@@ -13,4 +13,9 @@ class Book extends Model
     public function CartItem(){
         return $this->belongsTo(CartItem::class);
     }
+
+    public function loan()
+    {
+        return $this->belongsTo(Loan::class);
+    }
 }

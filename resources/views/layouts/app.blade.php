@@ -101,12 +101,40 @@
         </div>
     </div>
 
+    {{-- MODAL RETURN --}}
+    <div class="modal fade" id="confirmReturnModal" tabindex="-1" aria-labelledby="confirmReturnModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmReturnModalLabel">Return Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to return the book?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form id="formReturn" method="POST" action="">
+                        @csrf
+                        @method('get')
+                        <button type="submit" class="btn btn-danger btn-sm">Return</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     @include('partials.footer')
 
     {{-- SCRIPTS --}}
     <script>
         document.getElementById('confirmDeleteModal').addEventListener('show.bs.modal', (e) => {
             document.getElementById('formDelete').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
+        })
+
+        document.getElementById('confirmReturnModal').addEventListener('show.bs.modal', (e) => {
+            document.getElementById('formReturn').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
         })
     </script>
 </body>

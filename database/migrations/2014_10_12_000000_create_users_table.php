@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('ktp')->unique();
             $table->string('address');
             $table->boolean('isAdmin');
+            $table->enum('status', ['Active', 'Banned'])->default('Active');
             $table->rememberToken();
             $table->timestamps();
         });

@@ -29,7 +29,7 @@
                             <div class="row">
                                 <div class="col-md-auto my-2">
                                     <a class="btn-default" href={{route('addToCart',$book->id)}}>Add to cart</a>
-                                    <button class="btn-alternate">Rent</button>
+                                    <a class="btn-alternate" href={{route('borrow',$book->id)}}>Borrow</a>
                                 </div>
                             </div>
                         @else

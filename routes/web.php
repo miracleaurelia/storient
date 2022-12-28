@@ -8,6 +8,7 @@ use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoanController;
 use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Auth;
 
@@ -103,4 +104,21 @@ Route::group(['middleware' => 'MemberRole'], function () {
     )->name('memberTransaction');
 
     Route::get('cart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
+
+    Route::get(
+        'remove/cart/{id}',
+        [CartController::class, 'removeCartItem']
+    )->name('removeCartItem');
+
+    Route::get('borrow/{id}', [LoanController::class, 'borrow'])->name('borrow');
+
+    Route::get(
+        'loans',
+        [LoanController::class, 'index']
+    )->name('memberLoans');
+
+    Route::get(
+        'return/{id}',
+        [LoanController::class, 'returnBook']
+    )->name('returnBook');
 });

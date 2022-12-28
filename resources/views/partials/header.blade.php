@@ -108,6 +108,10 @@
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/transactions">Transaction</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/loans">Loans</a>
+                            </li>
                         @else
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/adminTransactions">Transaction</a>
