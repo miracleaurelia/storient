@@ -84,6 +84,12 @@ Route::group(['middleware' => 'AdminRole'], function () {
         'adminTransactions/{id}',
         [TransactionController::class, 'verifyTransaction']
     )->name('verifyTransaction');
+    Route::get(
+        '/adminLoans',
+        [LoanController::class, 'adminLoans']
+    )->name('adminLoans');
+    Route::get('ban/{id}', [LoanController::class, 'banUser'])->name('banUser');
+    Route::post('verify/{id}', [LoanController::class, 'verifyBookReturn'])->name('verifyBookReturn');
 });
 
 Route::group(['middleware' => 'MemberRole'], function () {
@@ -117,8 +123,13 @@ Route::group(['middleware' => 'MemberRole'], function () {
         [LoanController::class, 'index']
     )->name('memberLoans');
 
-    Route::get(
+    Route::post(
         'return/{id}',
         [LoanController::class, 'returnBook']
     )->name('returnBook');
+
+    Route::post(
+        'returnWithFine/{id}',
+        [LoanController::class, 'returnBookWithFine']
+    )->name('returnBookWithFine');
 });

@@ -24,6 +24,8 @@ class CreateLoansTable extends Migration
             $table->dateTime('returnDeadlineTime');
             $table->integer('isReturned');
             $table->integer('fine');
+            $table->string('returnProof')->nullable();
+            $table->string('fineProof')->nullable();
             $table->timestamps();
         });
     }

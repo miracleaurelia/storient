@@ -69,6 +69,11 @@
                 @csrf
                 <div class="form-group mb-3">
                     <label for="paymentProof" class="fw-bold">Proof of Payment Image</label>
+                    <p>
+                        Amount: <b>Rp{{ $totalprice }},00</b>
+                        <br>
+                        Transfer to 6280678866 BCA a/n John Doe
+                    </p>
                     <input type="file" name="paymentProof"
                         class="form-control @error('paymentProof') is-invalid @enderror" id="paymentProof">
                     @error('paymentProof')

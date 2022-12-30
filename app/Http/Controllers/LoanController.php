@@ -4,16 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\Book;
 use App\Models\Loan;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class LoanController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index()
     {
         $user = auth()->user();
@@ -21,6 +18,13 @@ class LoanController extends Controller
         $unreturnedLoan = Loan::where('user_id', $user->id)->where('isReturned', 0)->get();
 
         return view('loan', compact('returnedLoan', 'unreturnedLoan'));
+    }
+
+    public function adminLoans() {
+        $returnedLoan = Loan::whereIn('isReturned', [1, 2])->get();
+        $unreturnedLoan = Loan::where('isReturned', 0)->get();
+
+        return view('adminLoans',  compact('returnedLoan', 'unreturnedLoan'));
     }
 
     public function borrow($id)
@@ -57,78 +61,87 @@ class LoanController extends Controller
         return redirect()->route('memberLoans')->with('success_message', 'Book borrowed successfully');
     }
 
-    public function returnBook($id) {
-        $book = Loan::findOrFail($id);
-        $book->isReturned = 1;
-        $book->returnTime = Carbon::now();
-        $book->save();
-
-        return redirect()->route('memberLoans')->with('success_message', 'Book returned successfully');
+    protected function returnValidator(array $data)
+    {
+        return Validator::make($data, [
+            'returnProof2' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    protected function returnValidatorWithFine(array $data)
     {
-        //
+        return Validator::make($data, [
+            'returnProof' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'fineProof' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function moveImage($string) {
+        $files = request()->file($string);
+        $fullFileName = $files->getClientOriginalName();
+        $fileName = pathinfo($fullFileName)['filename'];
+        $extension = $files->getClientOriginalExtension();
+        $image = $fileName . "-" . date('YmdHis') . "." . $extension;
+        if ($string == 'returnProof2') {
+            $string = 'returnProof';
+        }
+        $files->move(public_path($string), $image);
+
+        return $image;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Loan  $loan
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Loan $loan)
-    {
-        //
+    public function returnBook(Request $request, $id) {
+        $validator = $this->returnValidator($request->all());
+
+        if ($validator->fails()) {
+            return redirect('/loans')->withErrors($validator)->withInput()->with('error_message', "Please upload proof(s) of book return correctly!");
+        }
+        else {
+            $returnProof = $this->moveImage('returnProof2');
+
+            $book = Loan::findOrFail($id);
+            $book->isReturned = 1;
+            $book->returnTime = Carbon::now();
+            $book->returnProof = $returnProof;
+            $book->save();
+
+            return redirect()->route('memberLoans')->with('success_message', 'Book returned successfully');
+        }
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Loan  $loan
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Loan $loan)
-    {
-        //
+    public function returnBookWithFine(Request $request, $id) {
+        $validator = $this->returnValidatorWithFine($request->all());
+
+        if ($validator->fails()) {
+            return redirect('/loans')->withErrors($validator)->withInput()->with('error_message', "Please upload proof(s) of book return correctly!");
+        }
+        else {
+            $returnProof = $this->moveImage('returnProof');
+            $fineProof = $this->moveImage('fineProof');
+
+            $book = Loan::findOrFail($id);
+            $book->isReturned = 1;
+            $book->returnTime = Carbon::now();
+            $book->returnProof = $returnProof;
+            $book->fineProof = $fineProof;
+            $book->save();
+
+            return redirect()->route('memberLoans')->with('success_message', 'Book returned successfully');
+        }
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Loan  $loan
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Loan $loan)
-    {
-        //
+    public function banUser($id) {
+        $user = User::findOrFail($id);
+        $user->status = 'Banned';
+        $user->save();
+
+        return redirect()->route('adminLoans')->with('success_message', 'User banned successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Loan  $loan
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy(Loan $loan)
-    {
-        //
+    public function verifyBookReturn($id) {
+        $loan = Loan::findOrFail($id);
+        $loan->isReturned = 2;
+        $loan->save();
+        return redirect()->route('adminLoans')->with('success_message', 'Book return verified successfully');
     }
 }

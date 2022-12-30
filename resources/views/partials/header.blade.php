@@ -116,6 +116,10 @@
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/adminTransactions">Transaction</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/adminLoans">Loans</a>
+                            </li>
                         @endif
 
                         <li class="nav-item">

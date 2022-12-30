@@ -5,9 +5,23 @@
 @section('content')
     <div class="container pt-120">
         <h1 class="my-4 text-center">Enter Edit Book <span class="text-custom">Details</span></h1>
-        <div class="row py-5 mt-4 align-items-center">
-            <div class="col-md-4 pr-lg-5 mb-5 mb-md-0 bookForm-img">
-                <img src="{{ URL::asset('/images/edit.png') }}" alt="">
+        <div class="row py-5 mt-4 justify-content-center align-items-center">
+            <div class="col-md-6 pr-lg-5 mb-5 mb-md-0 bookForm-img">
+                <div class="form-group text-center">
+                    <label for="image" class="d-block">
+                        <img src="{{ asset('images/' . $book->image) }}" alt="{{ $book->bookTitle }}"
+                            class="rounded shadow-sm cursor-pointer" id="image-preview">
+                    </label>
+                    <button type="button" class="btn btn-info btn-sm mt-3 shadow-sm"
+                        id="changeImage">
+                        Change Image
+                    </button>
+                    @error('image')
+                        <span class="invalid-feedback" role="alert">
+                            <h5 class="error">Image must be filled </h5>
+                        </span>
+                    @enderror
+                </div>
             </div>
             <div class="col-md-6 ml-auto">
                 <div class="book-a book-card">
@@ -122,19 +136,8 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="book-form-main-field-container">
-                            <label class="main-field-label" for="image">Book's Image</label>
-                            <div class="book-form-field">
-                                <input type="file" class="pt-2 book-input @error('image') is-invalid @enderror"
-                                    name="image" id="image" placeholder="Book's Image">
-                                <label for="image"><i class="fas fa-regular fa-image"></i></label>
-
-                                @error('image')
-                                    <span class="invalid-feedback" role="alert">
-                                        <h5 class="error">Image must be filled </h5>
-                                    </span>
-                                @enderror
-                            </div>
+                        <div class="book-form-main-field-container d-none">
+                            <input type="file" name="image" class="d-none" id="image">
                         </div>
                         <div class="book-form-main-field-container">
                             <label class="main-field-label" for="preview">Book's Preview</label>
@@ -159,4 +162,20 @@
             </div>
         </div>
     </div>
+
+    <script>
+        let image = document.getElementById('image')
+        let imagePreview = document.getElementById('image-preview')
+        let changeimage = document.getElementById('changeImage')
+        if (image) {
+            image.onchange = (e) => {
+                const [file] = image.files
+                if (file) {
+                    imagePreview.src = URL.createObjectURL(file)
+                    changeImage.classList.remove('d-none')
+                }
+            }
+            changeImage.onclick = () => image.click()
+        }
+    </script>
 @endsection

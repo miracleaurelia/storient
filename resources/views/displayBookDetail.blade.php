@@ -29,7 +29,7 @@
                             <div class="row">
                                 <div class="col-md-auto my-2">
                                     <a class="btn-default" href={{route('addToCart',$book->id)}}>Add to cart</a>
-                                    <a class="btn-alternate" href={{route('borrow',$book->id)}}>Borrow</a>
+                                    <a href="#" data-uri="{{ route('borrow',$book->id) }}" class="btn btn-alternate" data-bs-toggle="modal" data-bs-target="#confirmBorrowModal">Borrow</a>
                                 </div>
                             </div>
                         @else

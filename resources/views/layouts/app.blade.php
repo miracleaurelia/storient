@@ -101,24 +101,34 @@
         </div>
     </div>
 
-    {{-- MODAL RETURN --}}
-    <div class="modal fade" id="confirmReturnModal" tabindex="-1" aria-labelledby="confirmReturnModalLabel"
+    {{-- MODAL BORROW --}}
+    <div class="modal fade" id="confirmBorrowModal" tabindex="-1" aria-labelledby="confirmBorrowModalLabel"
         aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="confirmReturnModalLabel">Return Confirmation</h5>
+                    <h5 class="modal-title" id="confirmBorrowModalLabel">Borrow Confirmation</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    Are you sure you want to return the book?
+                    <h3 class="text-danger">Please read before borrowing.</h3>
+                    <p>
+                        There are a few things you should know before borrowing our book.
+                        <ol>
+                            <li style="list-style: decimal">You can only borrow 1 book at a time and you can borrow the book for 1 week.</li>
+                            <li style="list-style: decimal">You are only allowed to borrow another book 1 week after returning the book safely to us.</li>
+                            <li style="list-style: decimal">The book you borrow will be sent to your home address. <a href="">Click here to update home address.</a></li>
+                            <li style="list-style: decimal">If you fail to return the book before the deadline, you will be charged Rp5.000,00 each day.</li>
+                            <li style="list-style: decimal">2 weeks of late return will result in permanent account ban and our officer will visit your address to demand for our book.</li>
+                        </ol>
+                    </p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <form id="formReturn" method="POST" action="">
+                    <form id="formBorrow" method="POST" action="">
                         @csrf
                         @method('get')
-                        <button type="submit" class="btn btn-danger btn-sm">Return</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Borrow</button>
                     </form>
                 </div>
             </div>
@@ -135,6 +145,15 @@
 
         document.getElementById('confirmReturnModal').addEventListener('show.bs.modal', (e) => {
             document.getElementById('formReturn').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
+        })
+
+        document.getElementById('confirmReturnWithFineModal').addEventListener('show.bs.modal', (e) => {
+            document.getElementById('fine').innerHTML = e.relatedTarget.getAttribute('data-fine')
+            document.getElementById('formReturnFine').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
+        })
+
+        document.getElementById('confirmBorrowModal').addEventListener('show.bs.modal', (e) => {
+            document.getElementById('formBorrow').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
         })
     </script>
 </body>
