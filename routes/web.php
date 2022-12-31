@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoanController;
 use Facade\FlareClient\View;
@@ -74,6 +75,10 @@ Route::group(['middleware' => 'AdminRole'], function () {
         'post/update/{id}',
         [BookController::class, 'update']
     )->name('updateBook');
+    Route::post(
+        'update/category/{id}',
+        [CategoryController::class, 'update']
+    )->name('updateCategory');
     Route::get(
         'delete/book',
         [BookController::class, 'delete']
@@ -100,6 +105,12 @@ Route::group(['middleware' => 'AdminRole'], function () {
     )->name('adminLoans');
     Route::get('ban/{id}', [LoanController::class, 'banUser'])->name('banUser');
     Route::post('verify/{id}', [LoanController::class, 'verifyBookReturn'])->name('verifyBookReturn');
+    Route::get(
+        'delete/category/{id}',
+        [CategoryController::class, 'deleteCategory']
+    )->name('deleteCategory');
+    Route::get('/display/category', [CategoryController::class, 'index'])->name('displayCategory');
+    Route::post('/add/category', [CategoryController::class, 'add'])->name('addCategory');
 });
 
 Route::group(['middleware' => 'MemberRole'], function () {

@@ -176,7 +176,7 @@ class BookController extends Controller
         $res = Book::find($id)->delete();
 
         if ($res) {
-            return redirect()->route('display')->with('success_message', 'Book inserted successfully');
+            return redirect()->route('display')->with('success_message', 'Book deleted successfully');
         }
 
         else {

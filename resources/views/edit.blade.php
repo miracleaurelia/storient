@@ -38,7 +38,8 @@
                             <label class="main-field-label" for="bookTitle">Book Title</label>
                             <div class="book-form-field">
                                 <input type="text" class="book-input @error('bookTitle') is-invalid @enderror"
-                                    id="bookTitle" name="bookTitle" placeholder="Book Title" value="{{ $book->bookTitle }}">
+                                    id="bookTitle" name="bookTitle" placeholder="Book Title"
+                                    value="{{ old('bookTitle') ? old('bookTitle') : $book->bookTitle }}">
                                 <label for="bookTitle"><i class="fas fa-book"></i></label>
 
                                 @error('bookTitle')
@@ -52,7 +53,7 @@
                             <label class="main-field-label" for="author">Book Author</label>
                             <div class="book-form-field">
                                 <input type="text" class="book-input @error('author') is-invalid @enderror"
-                                    id="author" name="author" placeholder="Book Author" value="{{ $book->author }}">
+                                    id="author" name="author" placeholder="Book Author" value="{{ old('author') ? old('author') : $book->author }}">
                                 <label for="author"><i class="fas fa-user"></i></label>
 
                                 @error('author')
@@ -67,7 +68,7 @@
                             <div class="book-form-field">
                                 <input type="number" class="book-input @error('pageCount') is-invalid @enderror"
                                     id="pageCount" name="pageCount" placeholder="Book's Page Count"
-                                    value="{{ $book->pageCount }}">
+                                    value="{{ old('pageCount') ? old('pageCount') : $book->pageCount }}">
                                 <label for="pageCount"><i class="fas fa-sort-numeric-up"></i></label>
 
                                 @error('pageCount')
@@ -82,7 +83,7 @@
                             <div class="book-form-field">
                                 <input type="number" class="book-input @error('releaseYear') is-invalid @enderror"
                                     id="releaseYear" name="releaseYear" placeholder="Book's Release Year"
-                                    value="{{ $book->releaseYear }}">
+                                    value="{{ old('releaseYear') ? old('releaseYear') : $book->releaseYear }}">
                                 <label for="releaseYear"><i class="fas fa-calendar-alt"></i></label>
 
                                 @error('releaseYear')
@@ -121,7 +122,7 @@
                             <label class="main-field-label" for="price">Book's Price</label>
                             <div class="book-form-field">
                                 <input type="text" class="book-input @error('price') is-invalid @enderror" id="price"
-                                    name="price" placeholder="Book's Price" value="{{ $book->price }}">
+                                    name="price" placeholder="Book's Price" value="{{ old('price') ? old('price') : $book->price }}">
                                 <label for="price"><i class="fas fa-solid fa-dollar-sign"></i></label>
 
                                 @error('price')
@@ -136,7 +137,7 @@
                             <div class="book-form-field">
                                 <input type="text" class="book-input @error('description') is-invalid @enderror"
                                     id="description" name="description" placeholder="Book's Description"
-                                    value="{{ $book->description }}">
+                                    value="{{ old('description') ? old('description') : $book->description }}">
                                 <label for="description"><i class="fas fa-regular fa-comment-dots"></i></label>
 
                                 @error('description')
