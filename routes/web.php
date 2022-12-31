@@ -31,6 +31,8 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/display/book', [BookController::class, 'showBook'])->name('display');
 
+Route::get('/display/category/{id}', [BookController::class, 'showBookWithCategory'])->name('displayWithCategory');
+
 Route::get(
     '/display/book/{id}',
     [BookController::class, 'showBookDetail']
@@ -61,6 +63,10 @@ Route::group(['middleware' => 'AdminRole'], function () {
         [BookController::class, 'updateBookView']
     )->name('updateBookView');
     Route::get(
+        'updateView/book/{id}',
+        [BookController::class, 'updateBookWithCategoryView']
+    )->name('updateBookWithCategoryView');
+    Route::get(
         'post/edit/{id}',
         [BookController::class, 'edit']
     )->name('editBook');
@@ -72,6 +78,10 @@ Route::group(['middleware' => 'AdminRole'], function () {
         'delete/book',
         [BookController::class, 'delete']
     )->name('delete');
+    Route::get(
+        'delete/book/{id}',
+        [BookController::class, 'deleteWithCategory']
+    )->name('deleteWithCategory');
     Route::get(
         'deleteDB/book/{id}',
         [BookController::class, 'deleteDB']

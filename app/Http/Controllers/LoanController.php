@@ -14,7 +14,7 @@ class LoanController extends Controller
     public function index()
     {
         $user = auth()->user();
-        $returnedLoan = Loan::where('user_id', $user->id)->where('isReturned', 1)->get();
+        $returnedLoan = Loan::where('user_id', $user->id)->whereIn('isReturned', [1, 2])->get();
         $unreturnedLoan = Loan::where('user_id', $user->id)->where('isReturned', 0)->get();
 
         return view('loan', compact('returnedLoan', 'unreturnedLoan'));

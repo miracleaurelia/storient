@@ -95,11 +95,17 @@
 
                         <div class="book-form-main-field-container">
                             <label class="main-field-label" for="category">Book's Category</label>
-                            <div class="book-form-field">
-                                <input type="text" class="book-input @error('category') is-invalid @enderror"
-                                    id="category" name="category" placeholder="Book's Category"
-                                    value="{{ old('category') }}">
-                                <label for="category"><i class="fas fa-th-large"></i></label>
+                            <div class="book-form-field d-flex">
+                                <label for="category" style="position: initial"><i class="fas fa-th-large"></i></label>
+                                <select style="border: none; border-radius: 0;"
+                                    class="selectpicker @error('category') is-invalid @enderror" id="category" name="category[]" multiple data-live-search="true">
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                            @if (in_array($category->id, old('category',[]))) selected="selected" @endif>
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
 
                                 @error('category')
                                     <span class="invalid-feedback" role="alert">

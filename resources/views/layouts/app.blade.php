@@ -17,41 +17,12 @@
     </script>
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
 </head>
 
 <body>
     {{-- NAVBAR --}}
-    @include('partials.header',
-        ['navItems' =>
-            [
-                [
-                    'item' => 'Home',
-                    'title' => 'Home Page',
-                    'navLink' => ''
-                ],
-                [
-                    'item' => 'Display',
-                    'title' => 'Display Book',
-                    'navLink' => 'display/book'
-                ],
-                [
-                    'item' => 'Insert',
-                    'title' => 'Insert Book',
-                    'navLink' => 'create/book'
-                ],
-                [
-                    'item' => 'Update',
-                    'title' => 'Update Book',
-                    'navLink' => 'updateView/book'
-                ],
-                [
-                    'item' => 'Delete',
-                    'title' => 'Delete Book',
-                    'navLink' => 'delete/book'
-                ]
-            ]
-        ]
-    )
+    @include('partials.header')
 
     {{-- CONTENT --}}
     @yield('content')
@@ -156,6 +127,8 @@
             document.getElementById('formBorrow').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
         })
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
 </body>
 
 </html>

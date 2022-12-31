@@ -694,3 +694,7 @@ img {
 .text-justify {
     text-align: justify;
 }
+
+.bootstrap-select {
+    width: 100% !important;
+}

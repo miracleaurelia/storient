@@ -80,6 +80,10 @@
                         <a class="nav-link " aria-current="page" href="/">Home</a>
                     </li>
                     @guest
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="/display/book">Books</a>
+                        </li>
+
                         @if (Route::has('login'))
                             <li class="nav-item">
                                 <a class="nav-link navBtnGuestLogin" href="{{ route('login') }}">
@@ -96,11 +100,12 @@
                             </li>
                         @endif
                     @else
-                        <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="/display/book">Books</a>
-                        </li>
 
                         @if (Auth::user()->isAdmin == 0)
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/display/book">Books</a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/cart">Cart</a>
                             </li>
@@ -113,6 +118,10 @@
                                 <a class="nav-link " aria-current="page" href="/loans">Loans</a>
                             </li>
                         @else
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/display/book">Books</a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/adminTransactions">Transaction</a>
                             </li>

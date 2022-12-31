@@ -22,7 +22,6 @@ class CreateBooksTable extends Migration
             $table->text('description');
             $table->integer('pageCount');
             $table->integer('releaseYear');
-            $table->string('category');
             $table->string('preview');
             $table->timestamps();
         });

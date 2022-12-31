@@ -94,15 +94,25 @@
                         </div>
                         <div class="book-form-main-field-container">
                             <label class="main-field-label" for="category">Book's Category</label>
-                            <div class="book-form-field">
-                                <input type="text" class="book-input @error('category') is-invalid @enderror"
-                                    id="category" name="category" placeholder="Book's Category"
-                                    value="{{ $book->category }}">
-                                <label for="category"><i class="fas fa-th-large"></i></label>
+                            <div class="book-form-field d-flex">
+                                <label for="category" style="position: initial"><i class="fas fa-th-large"></i></label>
+                                <select style="border: none; border-radius: 0;"
+                                    class="selectpicker @error('category') is-invalid @enderror" id="category" name="category[]" multiple="multiple" data-live-search="true">
+                                    @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}"
+                                            @foreach ($book->category as $bc)
+                                                @if (in_array($category->id, old('category', [$bc->id]))) selected
+                                                @endif
+                                            @endforeach
+                                            >
+                                            {{ $category->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
 
                                 @error('category')
                                     <span class="invalid-feedback" role="alert">
-                                        <h5 class="error">Category must be filled & is less than 25 characters</h5>
+                                        <h5 class="error">Category must be choosen</h5>
                                     </span>
                                 @enderror
                             </div>

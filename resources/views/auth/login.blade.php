@@ -19,6 +19,19 @@
                             {{ session('error') }}
                         </div>
                     @endif
+
+                    @php
+                    if (isset($_COOKIE['login_email']) && isset($_COOKIE['login_pass'])) {
+                        $login_email = $_COOKIE['login_email'];
+                        $login_pass = $_COOKIE['login_pass'];
+                        $is_remember = "checked='checked'";
+                    }
+                    else {
+                        $login_email = '';
+                        $login_pass = '';
+                        $is_remember = '';
+                    }
+                    @endphp
                     <form action="{{ Route('login') }}" method="POST">
                         @csrf
                         <div class="form-group mb-3">
@@ -30,7 +43,7 @@
                             @enderror
                             <input type="text" class="form-control @error('email') is-invalid @enderror" name="email"
                                 id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email"
-                                value="{{ old('email') }}">
+                                @if ($login_email != '') value="{{ $login_email }}" @else value="{{ old('email') }}" @endif>
 
                         </div>
                         <div class="form-group mb-3">
@@ -42,7 +55,15 @@
                             @enderror
                             <input type="password" class="form-control @error('password') is-invalid @enderror"
                                 name="password" id="exampleInputPassword1" placeholder="Password"
-                                value="{{ old('password') }}">
+                                @if ($login_pass != '') value="{{ $login_pass }}" @else value="{{ old('password') }}" @endif>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" name="remember" id="remember"
+                            {{$is_remember}}>
+
+                            <label class="form-check-label" for="remember">
+                                {{ __('Remember Me') }}
+                            </label>
                         </div>
                         <button type="submit" class="btn btnLoginForm w-100">Login</button>
                         <p class="dontHaveAccount">Don't have an account? <a href="/register">Sign Up</a></p>
