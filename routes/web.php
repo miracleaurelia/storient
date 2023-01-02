@@ -38,6 +38,8 @@ Route::get(
     '/display/book/{id}',
     [BookController::class, 'showBookDetail']
 )->name('showBookDetail');
+
+Route::get('/book/search', [BookController::class, 'search'])->name('searchBook');
 // Route::middleware('guest')->group(function () {
 //     Route::get("/login", function () {
 //         return view("login");

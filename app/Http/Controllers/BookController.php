@@ -86,15 +86,16 @@ class BookController extends Controller
         // if (!Auth::check()) {
         //     return redirect('/login')->with('error_message', 'Please login first');
         // }
-        $books = Book::all();
+        $books = Book::paginate(6);
         $categories = Category::all();
         return view('displayBook', compact('books', 'categories'));
     }
 
     public function showBookWithCategory($id) {
         $category = Category::findOrFail($id);
+        $books = $category->book()->paginate(6);
         $categories = Category::all();
-        return view('displayBook', ['books' => $category->book, 'categories' => $categories]);
+        return view('displayBook', ['books' => $books, 'categories' => $categories]);
     }
 
     public function showBookDetail($id) {
@@ -103,15 +104,16 @@ class BookController extends Controller
     }
 
     public function updateBookView() {
-        $books = Book::all();
+        $books = Book::paginate(6);
         $categories = Category::all();
         return view('updateBook', compact('books', 'categories'));
     }
 
     public function updateBookWithCategoryView($id) {
         $category = Category::findOrFail($id);
+        $books = $category->book()->paginate(6);
         $categories = Category::all();
-        return view('updateBook', ['books' => $category->book, 'categories' => $categories]);
+        return view('updateBook', ['books' => $books, 'categories' => $categories]);
     }
 
     public function edit($id) {
@@ -160,15 +162,16 @@ class BookController extends Controller
     }
 
     public function delete() {
-        $books = Book::all();
+        $books = Book::paginate(6);
         $categories = Category::all();
         return view('deleteBook', compact('books', 'categories'));
     }
 
     public function deleteWithCategory($id) {
         $category = Category::findOrFail($id);
+        $books = $category->book()->paginate(6);
         $categories = Category::all();
-        return view('deleteBook', ['books' => $category->book, 'categories' => $categories]);
+        return view('deleteBook', ['books' => $books, 'categories' => $categories]);
     }
 
     public function deleteDB($id) {
@@ -182,5 +185,13 @@ class BookController extends Controller
         else {
             return redirect()->route('display')->with('error_message', 'Something went wrong');
         }
+    }
+
+    public function search(Request $request) {
+        $request->validate(['search' => 'required']);
+        $books = Book::where('bookTitle', 'like', '%' . $request->search . '%')->paginate(8)->withQueryString();
+        return view('searchResults', [
+            'books' => $books
+        ]);
     }
 }
