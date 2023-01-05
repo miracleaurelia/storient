@@ -184,20 +184,14 @@ class BookController extends Controller
     }
 
     public function deleteDB($id) {
-        $book = Book::find($id);
+        $book = Book::findOrFail($id);
         if ($book->is_deleted == 1) {
-            return view('products.notFound');
+            return view('notFound');
         }
+        $book->is_deleted = 1;
+        $book->save();
 
-        $res = $book->delete();
-
-        if ($res) {
-            return redirect()->route('display')->with('success_message', 'Book deleted successfully');
-        }
-
-        else {
-            return redirect()->route('display')->with('error_message', 'Something went wrong');
-        }
+        return redirect()->route('display')->with('success_message', 'Book deleted successfully');
     }
 
     public function search(Request $request) {
