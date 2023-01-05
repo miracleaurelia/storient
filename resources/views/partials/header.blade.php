@@ -46,7 +46,7 @@
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse " id="navbarSupportedContent">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 {{-- <h1>hi</h1> --}}
                 {{-- <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     @forelse ($navItems as $navItem)
@@ -75,11 +75,15 @@
                         Good Night
                     @endif
                 </h5> --}}
-                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex justify-content-end w-100">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0 d-flex w-100">
                     <li class="nav-item">
                         <a class="nav-link " aria-current="page" href="/">Home</a>
                     </li>
                     @guest
+                        <li class="nav-item">
+                            <a class="nav-link " aria-current="page" href="/display/book">Books</a>
+                        </li>
+
                         @if (Route::has('login'))
                             <li class="nav-item">
                                 <a class="nav-link navBtnGuestLogin" href="{{ route('login') }}">
@@ -96,11 +100,12 @@
                             </li>
                         @endif
                     @else
-                        <li class="nav-item">
-                            <a class="nav-link " aria-current="page" href="/display/book">Books</a>
-                        </li>
 
                         @if (Auth::user()->isAdmin == 0)
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/display/book">Books</a>
+                            </li>
+
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/cart">Cart</a>
                             </li>
@@ -108,9 +113,25 @@
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/transactions">Transaction</a>
                             </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/loans">Loans</a>
+                            </li>
                         @else
                             <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/display/book">Books</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/display/category">Category</a>
+                            </li>
+
+                            <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/adminTransactions">Transaction</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/adminLoans">Loans</a>
                             </li>
                         @endif
 
@@ -126,6 +147,11 @@
 
                     @endguest
                 </ul>
+
+                <form class="d-flex" action="{{ route('searchBook') }}" method="GET" role="search">
+                    <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="search" aria-describedby="nav-search">
+                    <button class="btn btn-outline-success" type="submit" id="nav-search">Search</button>
+                </form>
             </div>
         </div>
     </nav>
