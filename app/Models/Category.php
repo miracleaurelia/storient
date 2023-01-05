@@ -15,4 +15,8 @@ class Category extends Model
     {
     	return $this->belongsToMany(Book::class);
     }
+
+    public function available_books() {
+        return $this->book()->where('is_deleted','=', 0);
+    }
 }

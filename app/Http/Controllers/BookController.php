@@ -86,38 +86,44 @@ class BookController extends Controller
         // if (!Auth::check()) {
         //     return redirect('/login')->with('error_message', 'Please login first');
         // }
-        $books = Book::paginate(6);
+        $books = Book::where('is_deleted', 0)->paginate(6);
         $categories = Category::all();
         return view('displayBook', compact('books', 'categories'));
     }
 
     public function showBookWithCategory($id) {
         $category = Category::findOrFail($id);
-        $books = $category->book()->paginate(6);
+        $books = $category->available_books()->paginate(6);
         $categories = Category::all();
         return view('displayBook', ['books' => $books, 'categories' => $categories]);
     }
 
     public function showBookDetail($id) {
         $book = Book::find($id);
+        if ($book->is_deleted == 1) {
+            return view('notFound');
+        }
         return view('displayBookDetail')->with('book', $book);
     }
 
     public function updateBookView() {
-        $books = Book::paginate(6);
+        $books = Book::where('is_deleted', 0)->paginate(6);
         $categories = Category::all();
         return view('updateBook', compact('books', 'categories'));
     }
 
     public function updateBookWithCategoryView($id) {
         $category = Category::findOrFail($id);
-        $books = $category->book()->paginate(6);
+        $books = $category->available_books()->paginate(6);
         $categories = Category::all();
         return view('updateBook', ['books' => $books, 'categories' => $categories]);
     }
 
     public function edit($id) {
         $book = Book::findOrFail($id);
+        if ($book->is_deleted == 1) {
+            return view('notFound');
+        }
         $categories = Category::all();
         return view('edit', compact('book', 'categories'));
     }
@@ -136,6 +142,9 @@ class BookController extends Controller
         ]);
 
         $book = Book::find($id);
+        if ($book->is_deleted == 1) {
+            return view('notFound');
+        }
         $book->update($this->bookReq);
 
         BookCategory::where('book_id', $id)->delete();
@@ -162,21 +171,25 @@ class BookController extends Controller
     }
 
     public function delete() {
-        $books = Book::paginate(6);
+        $books = Book::where('is_deleted', 0)->paginate(6);
         $categories = Category::all();
         return view('deleteBook', compact('books', 'categories'));
     }
 
     public function deleteWithCategory($id) {
         $category = Category::findOrFail($id);
-        $books = $category->book()->paginate(6);
+        $books = $category->available_books()->paginate(6);
         $categories = Category::all();
         return view('deleteBook', ['books' => $books, 'categories' => $categories]);
     }
 
     public function deleteDB($id) {
+        $book = Book::find($id);
+        if ($book->is_deleted == 1) {
+            return view('products.notFound');
+        }
 
-        $res = Book::find($id)->delete();
+        $res = $book->delete();
 
         if ($res) {
             return redirect()->route('display')->with('success_message', 'Book deleted successfully');
@@ -189,7 +202,7 @@ class BookController extends Controller
 
     public function search(Request $request) {
         $request->validate(['search' => 'required']);
-        $books = Book::where('bookTitle', 'like', '%' . $request->search . '%')->paginate(8)->withQueryString();
+        $books = Book::where('bookTitle', 'like', '%' . $request->search . '%')->where('is_deleted', 0)->paginate(8)->withQueryString();
         return view('searchResults', [
             'books' => $books
         ]);

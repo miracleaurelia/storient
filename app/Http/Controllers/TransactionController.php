@@ -15,10 +15,12 @@ class TransactionController extends Controller
                 ->where('carts.UserID','=',auth()->user()->id)
                 ->first();
         foreach($carts->CartItem as $item){
-            TransactionDetail::create([
-                'TransactionID' => $headerID,
-                'BookID' => $item->Book->id,
-            ]);
+            if ($item->Book->is_deleted == 0) {
+                TransactionDetail::create([
+                    'TransactionID' => $headerID,
+                    'BookID' => $item->Book->id,
+                ]);
+            }
         }
     }
     //
