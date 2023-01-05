@@ -51,9 +51,11 @@ Route::get('/book/search', [BookController::class, 'search'])->name('searchBook'
 
 // });
 
-// Route::middleware('auth')->group(function () {
-
-// });
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [AuthController::class,'profile'])->name('profile');
+    Route::get('/editProfile', [AuthController::class,'editProfile']);
+    Route::post('/editProfile', [AuthController::class, 'updateProfile']);
+});
 
 Route::group(['middleware' => 'AdminRole'], function () {
     Route::get('/create/book', [BookController::class, 'createBook'])->name('createBook');

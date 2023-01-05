@@ -27,9 +27,9 @@
                                 {{ $message }}
                             </div>
                         @enderror
-                        {{-- <input type="text" name="username" class="form-control @error('username') is-invalid @enderror"
+                        <input type="text" name="name" class="form-control @error('username') is-invalid @enderror"
                             id="inputUsername" aria-describedby="usernameHelp" placeholder="Enter username"
-                            value="{{ $member->username }}"> --}}
+                            value="{{ $member->name }}">
                     </div>
                     <div class="form-group mb-3">
                         <label for="inputEmail" class="text-white">Email address</label>
@@ -38,9 +38,9 @@
                                 {{ $message }}
                             </div>
                         @enderror
-                        {{-- <input type="text" name="email" class="form-control @error('email') is-invalid @enderror"
+                        <input type="text" name="email" class="form-control @error('email') is-invalid @enderror"
                             id="inputEmail" aria-describedby="emailHelp" placeholder="Enter email"
-                            value="{{ $member->email }}"> --}}
+                            value="{{ $member->email }}">
                     </div>
                     <div class="row">
                         <div class="form-group mb-3 col-6">
@@ -50,9 +50,9 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                            {{-- <input type="password" name="password"
+                            <input type="password" name="password"
                                 class="form-control @error('password') is-invalid @enderror" id="inputPassword"
-                                placeholder="Password" value="{{ $member->password }}"> --}}
+                                placeholder="Password" >
                         </div>
                         <div class="form-group mb-3 col-6">
                             <label for="inputConfirm" class="text-white">Confirm Password</label>
@@ -61,9 +61,9 @@
                                     {{ $message }}
                                 </div>
                             @enderror
-                            {{-- <input type="password" name="password_confirmation"
+                            <input type="password" name="password_confirmation"
                                 class="form-control @error('password_confirmation') is-invalid @enderror" id="inputConfirm"
-                                placeholder="Confirmation Password" value=""> --}}
+                                placeholder="Confirmation Password" value="">
                         </div>
                     </div>
                     <div class="form-group mb-3">
@@ -73,9 +73,9 @@
                                 {{ $message }}
                             </div>
                         @enderror
-                        {{-- <input type="text" name="phoneNumber"
+                        <input type="text" name="phoneNumber"
                             class="form-control @error('phoneNumber') is-invalid @enderror" id="inputPhoneNumber"
-                            placeholder="Phone Number" value="{{ $member->phoneNumber }}"> --}}
+                            placeholder="Phone Number" value="{{ $member->phone }}">
                     </div>
                     <div class="form-group mb-3">
                         <label for="inputKTP" class="text-white">KTP No.</label>
@@ -84,8 +84,8 @@
                                 {{ $message }}
                             </div>
                         @enderror
-                        {{-- <input type="text" name="ktp" class="form-control @error('ktp') is-invalid @enderror"
-                            id="inputKTP" placeholder="KTP" value="{{ $member->KTP }}"> --}}
+                        <input type="text" name="ktp" class="form-control @error('ktp') is-invalid @enderror"
+                            id="inputKTP" placeholder="KTP" value="{{ $member->ktp }}">
                     </div>
                     <div class="form-group mb-3">
                         <label for="inputAddress" class="text-white">Address</label>
@@ -94,7 +94,7 @@
                                 {{ $message }}
                             </div>
                         @enderror
-                        {{-- <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="inputAddress" rows="3">{{ $member->address }}</textarea> --}}
+                        <textarea class="form-control @error('address') is-invalid @enderror" name="address" id="inputAddress" rows="3">{{ $member->address }}</textarea>
                     </div>
                     <div class="d-flex align-items-center justify-content-between">
                         <button type="submit" class="btn-default">Save</button>

@@ -11,9 +11,10 @@ class CartItem extends Model
     protected $primaryKey = "id";
     protected $fillable = ['CartID','BookID'];
     public function Cart(){
-        return $this->belongsTo(Cart::class,'CartID','id');
+        return $this->belongsTo(Cart::class, 'CartID', 'id');
     }
     public function Book(){
-        return $this->belongsTo(Book::class, 'BookID', 'id');
+        return $this->belongsTo(Book::class, 'BookID', 'id')->where('is_deleted','=',0);
     }
+
 }
