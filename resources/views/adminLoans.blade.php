@@ -394,26 +394,30 @@
     </style>
 
     <script>
-        document.getElementById('userModal').addEventListener('show.bs.modal', (e) => {
-            let role;
-            if (e.relatedTarget.getAttribute('data-role') == 1) {
-                role = "Admin";
-            }
-            else {
-                role = "User"
-            }
-            document.getElementById('user-role').innerHTML = e.relatedTarget.getAttribute('data-status') + " " + role
-            document.getElementById('user-name').innerHTML = e.relatedTarget.getAttribute('data-name')
-            document.getElementById('user-email').innerHTML = e.relatedTarget.getAttribute('data-email')
-            document.getElementById('user-address').innerHTML = e.relatedTarget.getAttribute('data-address')
-            document.getElementById('user-phone').innerHTML = e.relatedTarget.getAttribute('data-phone')
-            document.getElementById('user-ktp').innerHTML = e.relatedTarget.getAttribute('data-ktp')
-            document.getElementById('user-contact').href = "https://wa.me/" + e.relatedTarget.getAttribute('data-phone')
-        })
+        if (document.getElementById('userModal') != null) {
+            document.getElementById('userModal').addEventListener('show.bs.modal', (e) => {
+                let role;
+                if (e.relatedTarget.getAttribute('data-role') == 1) {
+                    role = "Admin";
+                }
+                else {
+                    role = "User"
+                }
+                document.getElementById('user-role').innerHTML = e.relatedTarget.getAttribute('data-status') + " " + role
+                document.getElementById('user-name').innerHTML = e.relatedTarget.getAttribute('data-name')
+                document.getElementById('user-email').innerHTML = e.relatedTarget.getAttribute('data-email')
+                document.getElementById('user-address').innerHTML = e.relatedTarget.getAttribute('data-address')
+                document.getElementById('user-phone').innerHTML = e.relatedTarget.getAttribute('data-phone')
+                document.getElementById('user-ktp').innerHTML = e.relatedTarget.getAttribute('data-ktp')
+                document.getElementById('user-contact').href = "https://wa.me/" + e.relatedTarget.getAttribute('data-phone')
+            })
+        }
 
-        document.getElementById('confirmBanModal').addEventListener('show.bs.modal', (e) => {
-            document.getElementById('formBan').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
-        })
+        if ( document.getElementById('confirmBanModal') != null) {
+            document.getElementById('confirmBanModal').addEventListener('show.bs.modal', (e) => {
+                document.getElementById('formBan').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
+            })
+        }
     </script>
 
 @endsection

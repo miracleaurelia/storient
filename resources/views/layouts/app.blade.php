@@ -110,22 +110,30 @@
 
     {{-- SCRIPTS --}}
     <script>
-        document.getElementById('confirmDeleteModal').addEventListener('show.bs.modal', (e) => {
-            document.getElementById('formDelete').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
-        })
+        if (document.getElementById('confirmDeleteModal') != null) {
+            document.getElementById('confirmDeleteModal').addEventListener('show.bs.modal', (e) => {
+                document.getElementById('formDelete').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
+            })
+        }
 
-        document.getElementById('confirmReturnModal').addEventListener('show.bs.modal', (e) => {
-            document.getElementById('formReturn').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
-        })
+        if (document.getElementById('confirmReturnModal') != null) {
+            document.getElementById('confirmReturnModal').addEventListener('show.bs.modal', (e) => {
+                document.getElementById('formReturn').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
+            })
+        }
 
-        document.getElementById('confirmReturnWithFineModal').addEventListener('show.bs.modal', (e) => {
-            document.getElementById('fine').innerHTML = e.relatedTarget.getAttribute('data-fine')
-            document.getElementById('formReturnFine').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
-        })
+        if (document.getElementById('confirmReturnWithFineModal') != null) {
+            document.getElementById('confirmReturnWithFineModal').addEventListener('show.bs.modal', (e) => {
+                document.getElementById('fine').innerHTML = e.relatedTarget.getAttribute('data-fine')
+                document.getElementById('formReturnFine').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
+            })
+        }
 
-        document.getElementById('confirmBorrowModal').addEventListener('show.bs.modal', (e) => {
-            document.getElementById('formBorrow').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
-        })
+        if ( document.getElementById('confirmBorrowModal') != null) {
+            document.getElementById('confirmBorrowModal').addEventListener('show.bs.modal', (e) => {
+                document.getElementById('formBorrow').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
+            })
+        }
     </script>
     <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
