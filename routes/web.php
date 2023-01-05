@@ -7,7 +7,9 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\TransactionController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LoanController;
 use Facade\FlareClient\View;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,10 +32,14 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('/display/book', [BookController::class, 'showBook'])->name('display');
 
+Route::get('/display/category/{id}', [BookController::class, 'showBookWithCategory'])->name('displayWithCategory');
+
 Route::get(
     '/display/book/{id}',
     [BookController::class, 'showBookDetail']
 )->name('showBookDetail');
+
+Route::get('/book/search', [BookController::class, 'search'])->name('searchBook');
 // Route::middleware('guest')->group(function () {
 //     Route::get("/login", function () {
 //         return view("login");
@@ -60,6 +66,10 @@ Route::group(['middleware' => 'AdminRole'], function () {
         [BookController::class, 'updateBookView']
     )->name('updateBookView');
     Route::get(
+        'updateView/book/{id}',
+        [BookController::class, 'updateBookWithCategoryView']
+    )->name('updateBookWithCategoryView');
+    Route::get(
         'post/edit/{id}',
         [BookController::class, 'edit']
     )->name('editBook');
@@ -67,10 +77,18 @@ Route::group(['middleware' => 'AdminRole'], function () {
         'post/update/{id}',
         [BookController::class, 'update']
     )->name('updateBook');
+    Route::post(
+        'update/category/{id}',
+        [CategoryController::class, 'update']
+    )->name('updateCategory');
     Route::get(
         'delete/book',
         [BookController::class, 'delete']
     )->name('delete');
+    Route::get(
+        'delete/book/{id}',
+        [BookController::class, 'deleteWithCategory']
+    )->name('deleteWithCategory');
     Route::get(
         'deleteDB/book/{id}',
         [BookController::class, 'deleteDB']
@@ -83,6 +101,18 @@ Route::group(['middleware' => 'AdminRole'], function () {
         'adminTransactions/{id}',
         [TransactionController::class, 'verifyTransaction']
     )->name('verifyTransaction');
+    Route::get(
+        '/adminLoans',
+        [LoanController::class, 'adminLoans']
+    )->name('adminLoans');
+    Route::get('ban/{id}', [LoanController::class, 'banUser'])->name('banUser');
+    Route::post('verify/{id}', [LoanController::class, 'verifyBookReturn'])->name('verifyBookReturn');
+    Route::get(
+        'delete/category/{id}',
+        [CategoryController::class, 'deleteCategory']
+    )->name('deleteCategory');
+    Route::get('/display/category', [CategoryController::class, 'index'])->name('displayCategory');
+    Route::post('/add/category', [CategoryController::class, 'add'])->name('addCategory');
 });
 
 Route::group(['middleware' => 'MemberRole'], function () {
@@ -103,4 +133,26 @@ Route::group(['middleware' => 'MemberRole'], function () {
     )->name('memberTransaction');
 
     Route::get('cart/{id}', [CartController::class, 'addToCart'])->name('addToCart');
+
+    Route::get(
+        'remove/cart/{id}',
+        [CartController::class, 'removeCartItem']
+    )->name('removeCartItem');
+
+    Route::get('borrow/{id}', [LoanController::class, 'borrow'])->name('borrow');
+
+    Route::get(
+        'loans',
+        [LoanController::class, 'index']
+    )->name('memberLoans');
+
+    Route::post(
+        'return/{id}',
+        [LoanController::class, 'returnBook']
+    )->name('returnBook');
+
+    Route::post(
+        'returnWithFine/{id}',
+        [LoanController::class, 'returnBookWithFine']
+    )->name('returnBookWithFine');
 });

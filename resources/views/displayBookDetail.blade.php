@@ -12,7 +12,7 @@
         </div>
         <div class="row">
             <div class="col-md pb-2 d-flex justify-content-center">
-                <img src='{{ asset('images/' . $book->image) }}' />
+                <img style="max-height: 500px" src='{{ asset('images/' . $book->image) }}' />
             </div>
             <div class="col-md">
                 <div class="row">
@@ -22,21 +22,33 @@
                              {{ $book->author }}</p>
                         <p class="my-0"><b>Page Count:</b> {{ $book->pageCount }}</p>
                         <p class="my-0"><b>Release Year:</b> {{ $book->releaseYear }}</p>
-                        <p class="my-0"><b>Category:</b> {{ $book->category }}</p>
+                        <p class="my-0"><b>Category:</b>
+                            @foreach ( $book->category as $bc)
+                                @if ($loop->last)
+                                    {{ $bc->name }}
+                                @else
+                                    {{ $bc->name . ", " }}
+                                @endif
+                            @endforeach
+                        </p>
                         <p class="my-0"><b>Description:</b></p>
                         <p class="my-0">{{ $book->description }}</p>
-                        @if (Auth::user()->isAdmin == 0)
-                            <div class="row">
-                                <div class="col-md-auto my-2">
-                                    <a class="btn-default" href={{route('addToCart',$book->id)}}>Add to cart</a>
-                                    <button class="btn-alternate">Rent</button>
-                                </div>
-                            </div>
+                        @guest
+                            <a href="{{ route('login') }}" class="btn btn-warning">Login to Buy/Borrow</a>
                         @else
-                            <a href="{{ route('editBook', $book->id) }}" class="btn btn-warning" data-tip="edit">Edit</a>
+                            @if (Auth::user()->isAdmin == 0)
+                                <div class="row">
+                                    <div class="col-md-auto my-2">
+                                        <a class="btn-default" href={{route('addToCart',$book->id)}}>Add to cart</a>
+                                        <a href="#" data-uri="{{ route('borrow',$book->id) }}" class="btn btn-alternate" data-bs-toggle="modal" data-bs-target="#confirmBorrowModal">Borrow</a>
+                                    </div>
+                                </div>
+                            @else
+                                <a href="{{ route('editBook', $book->id) }}" class="btn btn-warning" data-tip="edit">Edit</a>
 
-                            <a href="#" data-uri="{{ route('deleteDB', $book->id) }}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete</a>
-                        @endif
+                                <a href="#" data-uri="{{ route('deleteDB', $book->id) }}" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">Delete</a>
+                            @endif
+                        @endguest
                     </div>
                 </div>
             </div>

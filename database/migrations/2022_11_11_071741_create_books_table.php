@@ -22,8 +22,8 @@ class CreateBooksTable extends Migration
             $table->text('description');
             $table->integer('pageCount');
             $table->integer('releaseYear');
-            $table->string('category');
             $table->string('preview');
+            $table->integer('is_deleted')->default(0);
             $table->timestamps();
         });
     }

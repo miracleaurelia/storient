@@ -570,23 +570,10 @@ img {
 
 .bookForm-img img,
 .insert-img img {
-    max-width: 100%;
-    max-height: 300px;
+    max-width: 75%;
+    max-height: 600px;
     display: block;
     margin: auto;
-    animation: zoom-in-out 4s linear infinite;
-}
-
-@keyframes zoom-in-out {
-    0% {
-        transform: scale(1, 1);
-    }
-    50% {
-        transform: scale(1.1, 1.1);
-    }
-    100% {
-        transform: scale(1, 1);
-    }
 }
 
 .submit-btn {
@@ -706,4 +693,8 @@ img {
 
 .text-justify {
     text-align: justify;
+}
+
+.bootstrap-select {
+    width: 100% !important;
 }
