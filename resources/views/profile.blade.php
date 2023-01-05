@@ -24,27 +24,27 @@
                 @endif
                 <div class="form-group mb-3">
                     <label class="text-white">Username</label>
-                    <input type="text" class="form-control" value="{{ $member->username }}" disabled>
+                    {{-- <input type="text" class="form-control" value="{{ $member->username }}" disabled> --}}
                 </div>
                 <div class="form-group mb-3">
                     <label class="text-white">Email Address</label>
-                    <input type="text" class="form-control" value="{{ $member->email }}" disabled>
+                    {{-- <input type="text" class="form-control" value="{{ $member->email }}" disabled> --}}
                 </div>
                 <div class="form-group mb-3">
                     <label class="text-white">Password</label>
-                    <input type="text" class="form-control" value="{{ $member->password }}" disabled>
+                    {{-- <input type="text" class="form-control" value="{{ $member->password }}" disabled> --}}
                 </div>
                 <div class="form-group mb-3">
                     <label class="text-white">Phone Number</label>
-                    <input type="text" class="form-control" value="{{ $member->phoneNumber }}" disabled>
+                    {{-- <input type="text" class="form-control" value="{{ $member->phoneNumber }}" disabled> --}}
                 </div>
                 <div class="form-group mb-3">
                     <label class="text-white">KTP No.</label>
-                    <input type="text" class="form-control" value="{{ $member->KTP }}" disabled>
+                    {{-- <input type="text" class="form-control" value="{{ $member->KTP }}" disabled> --}}
                 </div>
                 <div class="form-group mb-3">
                     <label class="text-white">Address</label>
-                    <input type="text" class="form-control" value="{{ $member->address }}" disabled>
+                    {{-- <input type="text" class="form-control" value="{{ $member->address }}" disabled> --}}
                 </div>
                 <div class="d-flex align-items-center justify-content-between">
                     <a href="/editProfile"><button type="button" class="btn-default">Edit Profile</button></a>

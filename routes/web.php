@@ -156,3 +156,7 @@ Route::group(['middleware' => 'MemberRole'], function () {
         [LoanController::class, 'returnBookWithFine']
     )->name('returnBookWithFine');
 });
+
+Route::get('/abc', function () {
+    return view('profile');
+});
