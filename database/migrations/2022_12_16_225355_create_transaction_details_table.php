@@ -18,7 +18,7 @@ class CreateTransactionDetailsTable extends Migration
             $table->unsignedBigInteger('TransactionID');
             $table->foreign('TransactionID')->on('transaction_headers')->references('id')->onUpdate('cascade')->onDelete('cascade');
             $table->unsignedBigInteger('BookID');
-            $table->foreign('BookID')->on('books')->references('id');
+            $table->foreign('BookID')->on('books')->references('id')->onDelete('');
             $table->timestamps();
         });
     }
