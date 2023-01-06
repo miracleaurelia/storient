@@ -42,7 +42,10 @@
                 </div>
                 <div class="d-flex align-items-center justify-content-between">
                     <a href="/editProfile"><button type="button" class="btn-default">Edit Profile</button></a>
-                    <button type="button" class="btn btn-danger py-2 px-4">Sign Out</button>
+                    <form action="{{ route('logout') }}" method="post">
+                        @csrf
+                        <button class="btn btn-danger py-2 px-4">Sign Out</button>
+                    </form>
                 </div>
             </div>
         </div>
