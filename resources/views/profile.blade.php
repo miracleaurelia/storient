@@ -3,12 +3,6 @@
 @section('title', 'Profile')
 
 @section('content')
-    {{-- @if ('BUKAN MEMBER')
-    <div class="container pt-120">
-        <h1 class="my-4 text-center">You must sign in to view profile!</h1>
-    </div> --}}
-
-    {{-- @elseif ('MEMBER') --}}
 
     <div class="container pt-120">
         <h1 class="my-4 text-center">My Profile</h1>
@@ -24,27 +18,27 @@
                 @endif
                 <div class="form-group mb-3">
                     <label class="text-white">Username</label>
-                    {{-- <input type="text" class="form-control" value="{{ $member->username }}" disabled> --}}
+                    <input type="text" class="form-control" value="{{ $member->name }}" disabled>
                 </div>
                 <div class="form-group mb-3">
                     <label class="text-white">Email Address</label>
-                    {{-- <input type="text" class="form-control" value="{{ $member->email }}" disabled> --}}
+                    <input type="text" class="form-control" value="{{ $member->email }}" disabled>
                 </div>
-                <div class="form-group mb-3">
+                {{-- <div class="form-group mb-3">
                     <label class="text-white">Password</label>
-                    {{-- <input type="text" class="form-control" value="{{ $member->password }}" disabled> --}}
-                </div>
+                    <input type="text" class="form-control" value="{{ $member->password }}" disabled>
+                </div> --}}
                 <div class="form-group mb-3">
                     <label class="text-white">Phone Number</label>
-                    {{-- <input type="text" class="form-control" value="{{ $member->phoneNumber }}" disabled> --}}
+                    <input type="text" class="form-control" value="{{ $member->phone }}" disabled>
                 </div>
                 <div class="form-group mb-3">
                     <label class="text-white">KTP No.</label>
-                    {{-- <input type="text" class="form-control" value="{{ $member->KTP }}" disabled> --}}
+                    <input type="text" class="form-control" value="{{ $member->ktp }}" disabled>
                 </div>
                 <div class="form-group mb-3">
                     <label class="text-white">Address</label>
-                    {{-- <input type="text" class="form-control" value="{{ $member->address }}" disabled> --}}
+                    <input type="text" class="form-control" value="{{ $member->address }}" disabled>
                 </div>
                 <div class="d-flex align-items-center justify-content-between">
                     <a href="/editProfile"><button type="button" class="btn-default">Edit Profile</button></a>

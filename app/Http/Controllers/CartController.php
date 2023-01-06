@@ -18,10 +18,14 @@ class CartController extends Controller
                 ->where('carts.UserID','=',auth()->user()->id)
                 ->first();
         $totalprice = 0;
+        $idx = 0;
         foreach($carts->CartItem as $item){
-            if ($item->Book->is_deleted == 0) {
+            if ($item->Book != null) {
                 $totalprice = $totalprice + $item->Book->price;
+            }else{
+                unset($carts->CartItem[$idx]);
             }
+            $idx = $idx + 1;
         }
         return $totalprice;
     }
@@ -39,16 +43,31 @@ class CartController extends Controller
         }
         $carts = Cart::with(['CartItem','CartItem.Book'])
                 ->where('carts.UserID','=',auth()->user()->id)
+                // ->where('CartItem.Book.is_deleted','=',0)
                 ->first();
+        // $carts = CartItem::with(['Cart'])
+        //         // ->where('carts.UserID','=',auth()->user()->id)
+        //         // ->where('CartItem.Book.is_deleted','=',0)
+        //         ->get();
+        // echo ($carts->CartItem[1]);
+        // $carts = DB::table('carts')
+        //     ->join('cart_items','cart_items.CartID','=','carts.id')
+        //     ->join('books','books.id','=','cart_items.BookID')
+        //     ->where('carts.UserID', '=', auth()->user()->id)
+        //     ->where('books.is_deleted', '=', 0)
+        //     ->first();
         $totalprice = 0;
+        $idx = 0;
         if ($carts) {
             foreach($carts->CartItem as $item){
-                if ($item->Book->is_deleted == 0) {
+                if ($item->Book != null) {
                     $totalprice = $totalprice + $item->Book->price;
+                }else{
+                    unset($carts->CartItem[$idx]);
                 }
+                $idx = $idx + 1;
             }
         }
-
         return view('cart',compact('carts', 'totalprice'));
     }
 
@@ -98,10 +117,10 @@ class CartController extends Controller
 
     public function removeCartItem($id) {
 
-        $res = CartItem::find($id)->delete();
+        $res = CartItem::find($id);
 
         if ($res->Book->is_deleted == 1) {
-            return view('products.notFound');
+            return view('notFound');
         }
 
         if ($res) {
@@ -111,5 +130,9 @@ class CartController extends Controller
         else {
             return redirect()->route('memberCart')->with('error_message', 'Something went wrong');
         }
+    }
+    public function deleteCartItem(){
+        $cartitems = CartItem::all();
+        
     }
 }
