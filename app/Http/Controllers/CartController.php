@@ -37,14 +37,17 @@ class CartController extends Controller
         if(!$carts){
             CartController::createCart();
         }
+
         $carts = Cart::with(['CartItem','CartItem.Book'])
                 ->where('carts.UserID','=',auth()->user()->id)
+                // ->where('CartItem.Book.is_deleted','=',0)
                 ->first();
+
         $totalprice = 0;
         if ($carts) {
-            foreach($carts->CartItem as $item){
-                if ($item->Book->is_deleted == 0) {
-                    $totalprice = $totalprice + $item->Book->price;
+            foreach($carts as $item) {
+                if ($item->is_deleted == 0) {
+                    $totalprice += $item->price;
                 }
             }
         }
@@ -98,11 +101,13 @@ class CartController extends Controller
 
     public function removeCartItem($id) {
 
-        $res = CartItem::find($id)->delete();
+        $res = CartItem::find($id);
 
         if ($res->Book->is_deleted == 1) {
-            return view('products.notFound');
+            return view('notFound');
         }
+
+        $res->delete();
 
         if ($res) {
             return redirect()->route('memberCart')->with('success_message', 'Cart item removed successfully');
