@@ -9,12 +9,12 @@ class CartItem extends Model
 {
     use HasFactory;
     protected $primaryKey = "id";
-    protected $fillable = ['CartID','BookID'];
+    protected $fillable = ['CartID','BookID',"qty"];
     public function Cart(){
         return $this->belongsTo(Cart::class, 'CartID', 'id');
     }
     public function Book(){
-        return $this->belongsTo(Book::class, 'BookID', 'id')->where('is_deleted','=',0);
+        return $this->belongsTo(Book::class, 'BookID', 'id')->where('is_deleted','=',0)->where('buy_stock','>',0);
     }
 
 }

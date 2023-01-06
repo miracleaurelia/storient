@@ -18,6 +18,7 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Book</th>
+                                        <th>Qty</th>
                                         <th>Price</th>
                                         <th>Action</th>
                                     </tr>
@@ -41,12 +42,17 @@
                                                     </div>
                                                 </div>
                                             </td>
-                                            <td>Rp{{ $book->Book->price }}</td>
-                                            <td>
+                                            <td><p class="my-2">{{ $book->qty }}</p></td>
+                                            <td><p class="my-2">Rp{{ $book->Book->price * $book->qty }}</p></td>
+                                            <td class="">
                                                 <a href="#" data-uri="{{ route('removeCartItem', $book->id) }}"
-                                                    class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                    class="btn btn-danger btn-sm my-2" data-bs-toggle="modal"
                                                     data-bs-target="#confirmDeleteModal">
                                                     Delete
+                                                </a>
+                                                <a href="#" class="btn btn-danger btn-sm" data-bs-toggle="modal" data-stock="{{ $book->Book->buy_stock }}"
+                                                    data-currqty="{{ $book->qty }}" data-bs-target="#updateCartQtyModal" data-uri="{{ route('updateCart', $book->id) }}">
+                                                    Update Qty
                                                 </a>
                                             </td>
                                         </tr>
@@ -55,7 +61,7 @@
                                         @endphp
                                     @endforeach
                                     <tr>
-                                        <td colspan="4" class="text-end table-footer">
+                                        <td colspan="5" class="text-end table-footer">
                                             <h5 class="p-0 m-0 fw-bold">Total Price: {{ $totalprice }}</h5>
                                         </td>
                                     </tr>

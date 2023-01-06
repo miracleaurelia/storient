@@ -24,6 +24,8 @@ class CreateBooksTable extends Migration
             $table->integer('releaseYear');
             $table->string('preview');
             $table->integer('is_deleted')->default(0);
+            $table->integer('buy_stock')->default(1);
+            $table->integer('borrow_stock')->default(1);
             $table->timestamps();
         });
     }

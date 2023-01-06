@@ -106,6 +106,42 @@
         </div>
     </div>
 
+    <div class="modal fade" id="updateCartQtyModal" tabindex="-1"
+        aria-labelledby="updateCartQtyModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form method="POST" action="" id="formUpdateQty">
+                    @csrf
+                    @method('post')
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="updateCartQtyModalLabel">Update Book Quantity</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="book-form-main-field-container">
+                            <label class="main-field-label" for="cartItemQty">Book Quantity (max <b id="maxqty"></b>)</label>
+                            <div class="book-form-field">
+                                <input type="number" min="1" class="book-input @error('cartItemQty') is-invalid @enderror" id="cartItemQty" name="cartItemQty" placeholder="Book Quantity" style="padding-left: 15px">
+
+                                @error('cartItemQty')
+                                    <span class="invalid-feedback" role="alert">
+                                        <h5 class="error">{{$message}}</h5>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Update</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
     @include('partials.footer')
 
     {{-- SCRIPTS --}}
@@ -132,6 +168,15 @@
         if ( document.getElementById('confirmBorrowModal') != null) {
             document.getElementById('confirmBorrowModal').addEventListener('show.bs.modal', (e) => {
                 document.getElementById('formBorrow').setAttribute('action', e.relatedTarget.getAttribute('data-uri'))
+            })
+        }
+
+        if ( document.getElementById('updateCartQtyModal') != null) {
+            document.getElementById('updateCartQtyModal').addEventListener('show.bs.modal', (e) => {
+                document.getElementById('maxqty').innerHTML = e.relatedTarget.getAttribute('data-stock');
+                document.getElementById('cartItemQty').max = e.relatedTarget.getAttribute('data-stock');
+                document.getElementById('cartItemQty').value = e.relatedTarget.getAttribute('data-currqty');
+                document.getElementById('formUpdateQty').setAttribute('action', e.relatedTarget.getAttribute('data-uri'));
             })
         }
     </script>

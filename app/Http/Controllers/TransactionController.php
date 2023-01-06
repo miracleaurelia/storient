@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use App\Models\Cart;
 use App\Models\TransactionDetail;
 use App\Models\TransactionHeader;
@@ -14,13 +15,19 @@ class TransactionController extends Controller
         $carts = Cart::with(['CartItem','CartItem.Book'])
         ->where('carts.UserID','=',auth()->user()->id)
         ->first();
-       
+
         foreach($carts->CartItem as $item){
             if ($item->Book != null) {
                 TransactionDetail::create([
                     'TransactionID' => $headerID,
                     'BookID' => $item->Book->id,
+                    'qty' => $item->qty
                 ]);
+
+                $currBook = Book::find($item->Book->id);
+                $currQty = $currBook->buy_stock;
+                $currBook->buy_stock = $currQty - $item->qty;
+                $currBook->save();
             }
         }
     }

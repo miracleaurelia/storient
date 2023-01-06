@@ -18,7 +18,9 @@ class BookController extends Controller
             'pageCount' => request()->pageCount,
             'releaseYear'=> request()->releaseYear,
             'description' => request()->description,
-            'price' => request()->price
+            'price' => request()->price,
+            'borrow_stock' => request()->borrow_stock,
+            'buy_stock' => request()->buy_stock
         ];
     }
 
@@ -48,7 +50,9 @@ class BookController extends Controller
             'category' => 'required',
             'description' => 'min:50',
             'price' => 'required|integer|gt:0',
-            'preview' => 'required|file|mimes:pdf'
+            'preview' => 'required|file|mimes:pdf',
+            'borrow_stock' => 'required|numeric|min:1',
+            'buy_stock' => 'required|numeric|min:1'
         ],[
             'min.description'=>'asdasd',
         ]);
@@ -67,7 +71,9 @@ class BookController extends Controller
                 'releaseYear' => $request->releaseYear,
                 'description' => $request->description,
                 'price' => $request->price,
-                'preview' => $preview
+                'preview' => $preview,
+                'buy_stock' => $request->buy_stock,
+                'borrow_stock' => $request->borrow_stock
             ]);
 
             foreach ($request->category as $category) {
@@ -138,7 +144,9 @@ class BookController extends Controller
             'category' => 'required',
             'description' => 'required|min:50',
             'price' => 'required|integer|gt:0',
-            'preview' => 'nullable|file|mimes:pdf'
+            'preview' => 'nullable|file|mimes:pdf',
+            'borrow_stock' => 'required|numeric|min:1',
+            'buy_stock' => 'required|numeric|min:1'
         ]);
 
         $book = Book::find($id);
