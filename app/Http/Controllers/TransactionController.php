@@ -12,10 +12,11 @@ class TransactionController extends Controller
 {
     public static function createTransactionDetail($headerID){
         $carts = Cart::with(['CartItem','CartItem.Book'])
-                ->where('carts.UserID','=',auth()->user()->id)
-                ->first();
+        ->where('carts.UserID','=',auth()->user()->id)
+        ->first();
+       
         foreach($carts->CartItem as $item){
-            if ($item->Book->is_deleted == 0) {
+            if ($item->Book != null) {
                 TransactionDetail::create([
                     'TransactionID' => $headerID,
                     'BookID' => $item->Book->id,

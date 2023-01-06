@@ -190,7 +190,7 @@ class BookController extends Controller
         }
         $book->is_deleted = 1;
         $book->save();
-
+        // CartController::deleteCartItem();
         return redirect()->route('display')->with('success_message', 'Book deleted successfully');
     }
 

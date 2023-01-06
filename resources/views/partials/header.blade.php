@@ -117,6 +117,10 @@
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/loans">Loans</a>
                             </li>
+                            
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/profile">Profile</a>
+                            </li>
                         @else
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/display/book">Books</a>
@@ -132,6 +136,10 @@
 
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/adminLoans">Loans</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/profile">Profile</a>
                             </li>
                         @endif
 
