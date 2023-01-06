@@ -22,6 +22,8 @@
                              {{ $book->author }}</p>
                         <p class="my-0"><b>Page Count:</b> {{ $book->pageCount }}</p>
                         <p class="my-0"><b>Release Year:</b> {{ $book->releaseYear }}</p>
+                        <p class="my-0"><b>Buy Stock:</b> {{ $book->buy_stock }}</p>
+                        <p class="my-0"><b>Borrow Stock:</b> {{ $book->borrow_stock }}</p>
                         <p class="my-0"><b>Category:</b>
                             @foreach ( $book->category as $bc)
                                 @if ($loop->last)
@@ -39,8 +41,16 @@
                             @if (Auth::user()->isAdmin == 0)
                                 <div class="row">
                                     <div class="col-md-auto my-2">
-                                        <a class="btn-default" href={{route('addToCart',$book->id)}}>Add to cart</a>
-                                        <a href="#" data-uri="{{ route('borrow',$book->id) }}" class="btn btn-alternate" data-bs-toggle="modal" data-bs-target="#confirmBorrowModal">Borrow</a>
+                                        @if ($book->buy_stock > 0)
+                                            <a class="btn-default" href={{route('addToCart',$book->id)}}>Add to cart</a>
+                                        @else
+                                            <button class="btn-default btn-disabled btn-secondary" disabled>Out of buy stock</button>
+                                        @endif
+                                        @if ($book->borrow_stock > 0)
+                                            <a href="#" data-uri="{{ route('borrow',$book->id) }}" class="btn btn-alternate" data-bs-toggle="modal" data-bs-target="#confirmBorrowModal">Borrow</a>
+                                        @else
+                                            <button class="btn-default btn-disabled btn-secondary" disabled>Out of borrow stock</button>
+                                        @endif
                                     </div>
                                 </div>
                             @else

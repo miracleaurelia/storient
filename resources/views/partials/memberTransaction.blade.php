@@ -3,7 +3,7 @@
         <h1>My Transactions</h1>
     </div>
     @if (count($transactions) > 0)
-    
+
         <div class="row">
             <div class="col">
                 <div class="table-list">
@@ -28,7 +28,7 @@
                                         <td>{{ $transaction->id }}</td>
                                         <td>
                                             @foreach ($transaction->TransactionDetail as $book)
-                                                <p>"{{$book->Book->bookTitle}}"</p>
+                                                <p>"{{$book->Book->bookTitle}}" ({{ $book->qty }} pcs)</p>
                                             @endforeach
                                         </td>
                                         {{-- sum of all bought book price --}}

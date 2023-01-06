@@ -157,6 +157,11 @@ Route::group(['middleware' => 'MemberRole'], function () {
         'returnWithFine/{id}',
         [LoanController::class, 'returnBookWithFine']
     )->name('returnBookWithFine');
+
+    Route::post(
+        'update/cart/{id}',
+        [CartController::class, 'updateCart']
+    )->name('updateCart');
 });
 
 Route::get('/abc', function () {

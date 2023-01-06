@@ -29,6 +29,16 @@ class LoanController extends Controller
 
     public function borrow($id)
     {
+        $book = Book::find($id);
+
+        if ($book->is_deleted == 1) {
+            return view('notFound');
+        }
+
+        if ($book->borrow_stock <= 0) {
+            return redirect()->back()->with('error_message', "Out of book borrow stock.");
+        }
+
         $user = auth()->user();
 
         $borrowed = Loan::where('user_id', $user->id)->where('isReturned', 0)->get();
@@ -45,7 +55,7 @@ class LoanController extends Controller
             $diff_in_days = $lastBorrowedReturnTime->diffInDays(Carbon::now());
 
             if ($diff_in_days <= 7) {
-                return redirect()->route('memberLoans')->with('error_message', "Cannot borrow books shorter than one week before the last book loan return's date.");
+                return redirect()->back()->with('error_message', "Cannot borrow books shorter than one week before the last book loan return's date.");
             }
         }
 
@@ -57,6 +67,10 @@ class LoanController extends Controller
             'isReturned' => 0,
             'fine' => 0
         ]);
+
+        $currQty = $book->borrow_stock;
+        $book->borrow_stock = $currQty - 1;
+        $book->save();
 
         return redirect()->route('memberLoans')->with('success_message', 'Book borrowed successfully');
     }
@@ -104,6 +118,11 @@ class LoanController extends Controller
             $book->returnTime = Carbon::now();
             $book->returnProof = $returnProof;
             $book->save();
+
+            $returnedBook = Book::find($book->book->id);
+            $currQty = $returnedBook->borrow_stock;
+            $returnedBook->borrow_stock = $currQty + 1;
+            $returnedBook->save();
 
             return redirect()->route('memberLoans')->with('success_message', 'Book returned successfully');
         }

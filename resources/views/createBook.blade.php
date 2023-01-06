@@ -78,6 +78,38 @@
                         </div>
 
                         <div class="book-form-main-field-container">
+                            <label class="main-field-label" for="buy_stock">Buy Stock</label>
+                            <div class="book-form-field">
+                                <input type="number" class="book-input @error('buy_stock') is-invalid @enderror"
+                                    id="buy_stock" name="buy_stock" placeholder="Book's Buy Stock"
+                                    value="{{ old('buy_stock') }}">
+                                <label for="buy_stock"><i class="fas fa-sort-numeric-up"></i></label>
+
+                                @error('buy_stock')
+                                    <span class="invalid-feedback" role="alert">
+                                        <h5 class="error">{{$message}}</h5>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="book-form-main-field-container">
+                            <label class="main-field-label" for="borrow_stock">Borrow Stock</label>
+                            <div class="book-form-field">
+                                <input type="number" class="book-input @error('borrow_stock') is-invalid @enderror"
+                                    id="borrow_stock" name="borrow_stock" placeholder="Book's Borrow Stock"
+                                    value="{{ old('borrow_stock') }}">
+                                <label for="borrow_stock"><i class="fas fa-sort-numeric-up"></i></label>
+
+                                @error('borrow_stock')
+                                    <span class="invalid-feedback" role="alert">
+                                        <h5 class="error">{{$message}}</h5>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="book-form-main-field-container">
                             <label class="main-field-label" for="releaseYear">Book's Release Year</label>
                             <div class="book-form-field">
                                 <input type="number" class="book-input @error('releaseYear') is-invalid @enderror"
@@ -95,7 +127,7 @@
 
                         <div class="book-form-main-field-container">
                             <label class="main-field-label" for="category">Book's Category</label>
-                            <div class="book-form-field d-flex">
+                            <div class="book-form-field d-flex mb-0">
                                 <label for="category" style="position: initial"><i class="fas fa-th-large"></i></label>
                                 <select style="border: none; border-radius: 0;"
                                     class="selectpicker @error('category') is-invalid @enderror" id="category" name="category[]" multiple data-live-search="true">
@@ -106,13 +138,12 @@
                                         </option>
                                     @endforeach
                                 </select>
-
-                                @error('category')
-                                    <span class="invalid-feedback" role="alert">
-                                        <h5 class="error">{{$message}}</h5>
-                                    </span>
-                                @enderror
                             </div>
+                            @error('category')
+                                <span class="invalid-feedback d-block" style="margin-bottom: 20px" role="alert">
+                                    <h5 class="error">{{$message}}</h5>
+                                </span>
+                            @enderror
                         </div>
 
                         <div class="book-form-main-field-container">

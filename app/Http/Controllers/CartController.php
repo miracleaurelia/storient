@@ -21,7 +21,7 @@ class CartController extends Controller
         $idx = 0;
         foreach($carts->CartItem as $item){
             if ($item->Book != null) {
-                $totalprice = $totalprice + $item->Book->price;
+                $totalprice += $item->Book->price * $item->qty;
             }else{
                 unset($carts->CartItem[$idx]);
             }
@@ -61,7 +61,7 @@ class CartController extends Controller
         if ($carts) {
             foreach($carts->CartItem as $item){
                 if ($item->Book != null) {
-                    $totalprice = $totalprice + $item->Book->price;
+                    $totalprice += $item->Book->price * $item->qty;
                 }else{
                     unset($carts->CartItem[$idx]);
                 }
@@ -75,6 +75,9 @@ class CartController extends Controller
         $book = Book::findOrFail($id);
         if ($book->is_deleted == 1) {
             return view('notFound');
+        }
+        if ($book->buy_stock <= 0) {
+            return redirect()->back()->with('error_message', 'Cannot buy/add to cart because item is out of stock');
         }
         $carts = Cart::with('User')->where('carts.UserID','=',auth()->user()->id)->first();
         if(!$carts){
@@ -123,6 +126,8 @@ class CartController extends Controller
             return view('notFound');
         }
 
+        $res->delete();
+
         if ($res) {
             return redirect()->route('memberCart')->with('success_message', 'Cart item removed successfully');
         }
@@ -131,8 +136,35 @@ class CartController extends Controller
             return redirect()->route('memberCart')->with('error_message', 'Something went wrong');
         }
     }
-    public function deleteCartItem(){
-        $cartitems = CartItem::all();
-        
+
+    protected function qtyValidator(array $data)
+    {
+        $rules = ['cartItemQty' => 'required'];
+        $messages = ['cartItemQty.required' => 'Book quantity is required.'];
+        return Validator::make($data, $rules, $messages);
+    }
+
+    public function updateCart(Request $request, $id) {
+        $validator = $this->qtyValidator($request->all());
+
+        $cartItem = CartItem::find($id);
+
+        $max_qty = $cartItem->Book->buy_stock;
+
+        $error_msg = 'Only ' . $max_qty . ' stock left';
+
+        if ($request->cartItemQty > $max_qty) {
+            return redirect('/cart')->withErrors(['cartItemQty' => $error_msg])->withInput()->with('error_message', "Please fill the book quantity correctly.");
+        }
+
+        if ($validator->fails()) {
+            return redirect('/cart')->withErrors($validator)->withInput()->with('error_message', "Please fill the book quantity correctly.");
+        }
+        else {
+            $cartItem->qty = $request->cartItemQty;
+            $cartItem->save();
+
+            return redirect()->route('memberCart')->with('success_message', 'Book quantity updated successfully');
+        }
     }
 }
