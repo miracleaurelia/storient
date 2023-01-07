@@ -48,6 +48,21 @@
                                         <td class="d-flex justify-content-end align-items-center" style="border-bottom-width: 0">
                                             <a href="#" class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#paymentProofModal{{ $transaction->id }}">Verify</a>
+                                                @if ($transaction->User->status == 'Active')
+                                                        <a href="#" data-uri="{{ route('banUserFromTransaction', $transaction->User->id) }}"
+                                                            class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                                                            data-bs-target="#confirmBanModal"
+                                                            >
+                                                            Ban User
+                                                        </a>
+                                                    @else
+                                                        <button disabled
+                                                            class="btn btn-secondary btn-sm"
+                                                            >
+                                                            Ban User
+                                                        </button>
+                                                    @endif
+                                            
                                         </td>
                                     </tr>
 
@@ -192,6 +207,30 @@
             <h2 class="text-white">There are no verified member transactions</h2>
         </div>
     @endif
+
+    
+    {{-- MODAL BAN USER --}}
+    <div class="modal fade" id="confirmBanModal" tabindex="-1" aria-labelledby="confirmBanModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmBanModalLabel">Ban Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to ban this user?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <form method="POST" action={{route('banUserFromTransaction',$transaction->User->id)}}>
+                        @csrf
+                        <button type="submit" class="btn btn-danger btn-sm">Ban User</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     {{-- MODAL USER INFO --}}

@@ -71,8 +71,7 @@
                     </div>
                 </div>
             </div>
-            <form action="/cart" method="POST" class="container d-flex flex-column p-0 mt-3" enctype="multipart/form-data">
-                @csrf
+            
                 <div class="form-group mb-3">
                     <label for="paymentProof" class="fw-bold">Proof of Payment Image</label>
                     <p>
@@ -80,18 +79,16 @@
                         <br>
                         Transfer to 6280678866 BCA a/n John Doe
                     </p>
-                    <input type="file" name="paymentProof"
-                        class="form-control @error('paymentProof') is-invalid @enderror" id="paymentProof">
-                    @error('paymentProof')
-                        <div class="text-danger">
-                            {{ $message }}
-                        </div>
-                    @enderror
+                    
                 </div>
                 <div class="d-flex justify-content-end">
-                    <button type="submit" class="btn btn-primary mx-0 my-2 py-2 px-4">Checkout</button>
+                    <a href="#" data-uri=""
+                        class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                        data-bs-target="#checkout">
+                        Checkout
+                    </a>
                 </div>
-            </form>
+            
         </div>
         @else
             <div class="my-5 py-5 d-flex justify-content-center align-items-center">
@@ -99,4 +96,101 @@
             </div>
         @endif
     </section>
+
+    {{-- MODAL CHECKOUT --}}
+
+    <div class="modal fade" id="checkout" tabindex="-1" aria-labelledby="confirmReturnModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <form action="/cart" method="POST" class="container d-flex flex-column p-0 mt-3" enctype="multipart/form-data">
+                    @csrf
+                    @method('post')
+                    <div class="modal-header">
+                        <h5 class="modal-title text-center" id="confirmReturnModalLabel">Return Confirmation</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body text-center">
+                        <h4 class="text-danger">Please read before checkout.</h4>
+                        <p>
+                            Amount: <b>Rp{{ $totalprice }},00</b>
+                            <br>
+                            Transfer to 6280678866 BCA a/n John Doe
+                        </p>
+                        <p>
+                            Upload your payment proof below.
+                        </p>
+                        <div class="row my-4 justify-content-center">
+                            <div class="col-md-6">
+                                <div class="form-group text-center">
+                                    <input type="file" name="paymentProof" class="d-none" id="returnProof">
+                                    <label for="paymentProof" class="d-block">
+                                        <img src="{{ asset('images/upload-file.png') }}" alt="Upload Return Proof"
+                                            class="w-50 rounded shadow-sm cursor-pointer" id="proof-preview">
+                                    </label>
+                                    <button type="button" class="btn btn-info btn-sm mt-3 shadow-sm" id="changeProofImage">
+                                        Upload payment proof
+                                    </button>
+                                    @error('paymentProof')
+                                        <span class="text-danger mt-2 d-block" role="alert">
+                                            <h5 class="error">Payment proof must be uploaded</h5>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Checkout</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let image = document.getElementById('returnProof')
+        let imagePreview = document.getElementById('proof-preview')
+        let changeImage = document.getElementById('changeProofImage')
+        if (image) {
+            image.onchange = (e) => {
+                const [file] = image.files
+                if (file) {
+                    imagePreview.src = URL.createObjectURL(file)
+                    changeImage.classList.remove('d-none')
+                }
+            }
+            changeImage.onclick = () => image.click()
+        }
+
+        let fineImage = document.getElementById('fineProof')
+        let fineImagePreview = document.getElementById('fine-preview')
+        let changeFineImage = document.getElementById('changeFineImage')
+        if (fineImage) {
+            fineImage.onchange = (e) => {
+                const [fineFile] = fineImage.files
+                if (fineFile) {
+                    fineImagePreview.src = URL.createObjectURL(fineFile)
+                    changeFineImage.classList.remove('d-none')
+                }
+            }
+            changeFineImage.onclick = () => fineImage.click()
+        }
+
+        let image2 = document.getElementById('returnProof2')
+        let imagePreview2 = document.getElementById('proof-preview2')
+        let changeImage2 = document.getElementById('changeProofImage2')
+        if (image2) {
+            image2.onchange = (e) => {
+                const [file2] = image2.files
+                if (file2) {
+                    imagePreview2.src = URL.createObjectURL(file2)
+                    changeImage2.classList.remove('d-none')
+                }
+            }
+            changeImage2.onclick = () => image2.click()
+        }
+    </script>
+
 @endsection
