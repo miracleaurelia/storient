@@ -44,10 +44,13 @@ class TransactionController extends Controller
 
         }else if(Auth::user()->isAdmin == 1){
             //get all trans where verified = false
-            $transactions = TransactionHeader::with(['TransactionDetail', 'User', 'TransactionDetail.Book'])
-            // ->where('transaction_headers.isApproved','=','0')
+            $unverifiedTransactions = TransactionHeader::with(['TransactionDetail', 'User', 'TransactionDetail.Book'])
+            ->where('transaction_headers.isApproved','=','0')
                 ->get();
-            return view('transaction',compact('transactions'));
+            $verifiedTransactions = TransactionHeader::with(['TransactionDetail', 'User', 'TransactionDetail.Book'])
+            ->where('transaction_headers.isApproved','=','1')
+                ->get();
+            return view('transaction',compact('unverifiedTransactions', 'verifiedTransactions'));
         }
 
     }
