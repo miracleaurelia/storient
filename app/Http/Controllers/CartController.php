@@ -114,7 +114,7 @@ class CartController extends Controller
             Cart::with('User')
                 ->where('carts.UserID', '=', auth()->user()->id)
                 ->delete();
-            return redirect()->route('home')->with('success_message', 'Checkout success, please wait for admin verification');
+            return redirect()->route('memberTransaction')->with('success_message', 'Checkout success, please wait for admin verification');
         }
     }
 
