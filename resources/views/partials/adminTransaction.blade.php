@@ -2,7 +2,7 @@
     <div class="row py-3">
         <h1>Unverified Transactions</h1>
     </div>
-    @if (count($transactions) > 0)
+    @if (count($unverifiedTransactions) > 0)
         <div class="row">
             <div class="col">
                 <div class="table-list">
@@ -22,8 +22,7 @@
                                 @php
                                     $k = 0;
                                 @endphp
-                                @foreach ($transactions as $transaction)
-                                    @if($transaction->isApproved == 0)
+                                @foreach ($unverifiedTransactions as $transaction)
                                     <tr>
                                         <td>{{ ++$k }}</td>
                                         <td>{{ $transaction->id }}</td>
@@ -41,18 +40,18 @@
                                         </td>
                                         <td>
                                             @foreach ($transaction->TransactionDetail as $book)
-                                                <p>{{$book->Book->bookTitle}}</p>
+                                                <p>{{$book->Book->bookTitle}} ({{ $book->qty }} pcs)</p>
                                             @endforeach
 
                                         </td>
                                         <td>{{$transaction->totalPrice}}</td>
-                                        <td class="d-flex justify-content-end align-items-center">
+                                        <td class="d-flex justify-content-end align-items-center" style="border-bottom-width: 0">
                                             <a href="#" class="btn btn-primary" data-bs-toggle="modal"
                                                 data-bs-target="#paymentProofModal{{ $transaction->id }}">Verify</a>
                                         </td>
                                     </tr>
-                                    
-                                    
+
+
                                     <div class="modal fade" id="paymentProofModal{{ $transaction->id }}" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
@@ -81,8 +80,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @endif
-                                    
+
                                 @endforeach
                             </tbody>
                         </table>
@@ -100,13 +98,13 @@
             <h2 class="text-white">There are no pending member transactions</h2>
         </div>
     @endif
-    
+
     {{-- ================================================================================ --}}
 
     <div class="row py-3">
         <h1>Verified Transactions</h1>
     </div>
-    @if (count($transactions) > 0)
+    @if (count($verifiedTransactions) > 0)
         <div class="row">
             <div class="col">
                 <div class="table-list">
@@ -126,8 +124,7 @@
                                 @php
                                     $k = 0;
                                 @endphp
-                                @foreach ($transactions as $transaction)
-                                    @if ($transaction->isApproved == 1)
+                                @foreach ($verifiedTransactions as $transaction)
                                     <tr>
                                         <td>{{ ++$k }}</td>
                                         <td>{{ $transaction->id }}</td>
@@ -145,17 +142,17 @@
                                         </td>
                                         <td>
                                             @foreach ($transaction->TransactionDetail as $book)
-                                                <p>{{$book->Book->bookTitle}}</p>
+                                                <p>{{$book->Book->bookTitle}} ({{ $book->qty }} pcs)</p>
                                             @endforeach
 
                                         </td>
                                         <td>{{$transaction->totalPrice}}</td>
-                                        <td class="d-flex justify-content-end align-items-center">
+                                        <td class="d-flex justify-content-end align-items-center" style="border-bottom-width: 0">
                                             <a href="#" class="btn btn-success" data-bs-toggle="modal"
                                                 data-bs-target="#paymentProof{{ $transaction->id }}">Verified (View Payment Proof)</a>
                                         </td>
                                     </tr>
-                                    
+
                                     <div class="modal fade verified" id="paymentProof{{ $transaction->id }}" tabindex="-1"
                                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
@@ -178,7 +175,6 @@
                                             </div>
                                         </div>
                                     </div>
-                                    @endif
                                 @endforeach
                             </tbody>
                         </table>

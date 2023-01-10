@@ -80,12 +80,19 @@
                                                     </div>
                                                 </td>
                                                 <td>
+                                                    @if ($rloans->fineProof != null)
                                                     <a href="#"
                                                         class="btn btn-danger btn-sm" data-bs-toggle="modal"
                                                         data-bs-target="#returnFineModal{{ $rloans->id }}"
                                                         >
                                                         See Image
                                                     </a>
+                                                    @else
+                                                    <button disabled
+                                                        class="btn btn-danger btn-sm">
+                                                        See Image
+                                                    </button>
+                                                    @endif
 
                                                     <div class="modal fade" id="returnFineModal{{ $rloans->id }}" tabindex="-1"
                                                         aria-labelledby="returnFineModalLabel{{ $rloans->id }}" aria-hidden="true">
