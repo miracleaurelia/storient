@@ -176,7 +176,7 @@
             </div>
         @else
             <div class="my-5 py-5 d-flex justify-content-center align-items-center">
-                <h2 class="text-white">There are no items in your loan history</h2>
+                <h2 class="text-white">No users have borrowed any book.</h2>
             </div>
         @endif
     </section>
@@ -267,7 +267,7 @@
             </div>
         @else
             <div class="my-5 py-5 d-flex justify-content-center align-items-center">
-                <h2 class="text-white">You currently do not borrow any book.</h2>
+                <h2 class="text-white">No user currently borrow any book.</h2>
             </div>
         @endif
     </section>
