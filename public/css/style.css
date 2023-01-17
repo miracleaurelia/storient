@@ -374,11 +374,11 @@ img {
     box-shadow: 0 0 0 5px rgba(0, 0, 0, 0.05), 0 0 0 10px rgba(0, 0, 0, 0.05);
 }
 
-.table-list th:first-child{
+.table-list th:first-child {
     border-radius: 10px 0 0 0;
 }
 
-.table-list th:last-child{
+.table-list th:last-child {
     border-radius: 0 10px 0 0;
 }
 
@@ -407,6 +407,16 @@ img {
 }
 .customViewLink {
     color: white;
+}
+.mainBookDetailContainer {
+    gap: 30px;
+}
+.mainBookDetailBox {
+    flex-grow: 2;
+}
+.bookDetailBox {
+    border: 1px solid var(--lightYellow);
+    background-color: var(--lightOrange);
 }
 /* .customViewLink:hover {
     color: var(--lightOrange);
@@ -704,4 +714,10 @@ img {
 
 .bootstrap-select {
     width: 100% !important;
+}
+
+@media screen and (max-width: 767px) {
+    .mainBookDetailBox {
+        flex-direction: column;
+    }
 }
