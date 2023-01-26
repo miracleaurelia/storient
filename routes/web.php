@@ -52,8 +52,8 @@ Route::get('/book/search', [BookController::class, 'search'])->name('searchBook'
 // });
 
 Route::middleware('auth')->group(function () {
-    Route::get('/profile', [AuthController::class,'profile'])->name('profile');
-    Route::get('/editProfile', [AuthController::class,'editProfile']);
+    Route::get('/profile', [AuthController::class, 'profile'])->name('profile');
+    Route::get('/editProfile', [AuthController::class, 'editProfile']);
     Route::post('/editProfile', [AuthController::class, 'updateProfile']);
 });
 
@@ -107,6 +107,10 @@ Route::group(['middleware' => 'AdminRole'], function () {
         '/adminLoans',
         [LoanController::class, 'adminLoans']
     )->name('adminLoans');
+    Route::get(
+        '/adminUnban',
+        [LoanController::class, 'adminUnban']
+    )->name('adminUnban');
     Route::get('ban/{id}', [LoanController::class, 'banUser'])->name('banUser');
     Route::post('verify/{id}', [LoanController::class, 'verifyBookReturn'])->name('verifyBookReturn');
     Route::get(

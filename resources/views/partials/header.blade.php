@@ -100,7 +100,6 @@
                             </li>
                         @endif
                     @else
-
                         @if (Auth::user()->isAdmin == 0)
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/display/book">Books</a>
@@ -117,7 +116,7 @@
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/loans">Loans</a>
                             </li>
-                            
+
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/profile">Profile</a>
                             </li>
@@ -132,6 +131,10 @@
 
                             <li class="nav-item">
                                 <a class="nav-link " aria-current="page" href="/adminTransactions">Transaction</a>
+                            </li>
+
+                            <li class="nav-item">
+                                <a class="nav-link " aria-current="page" href="/adminUnban">Unban</a>
                             </li>
 
                             <li class="nav-item">
@@ -157,7 +160,8 @@
                 </ul>
 
                 <form class="d-flex" action="{{ route('searchBook') }}" method="GET" role="search">
-                    <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search" name="search" aria-describedby="nav-search">
+                    <input class="form-control me-2" type="text" placeholder="Search" aria-label="Search"
+                        name="search" aria-describedby="nav-search">
                     <button class="btn btn-outline-success" type="submit" id="nav-search">Search</button>
                 </form>
             </div>
