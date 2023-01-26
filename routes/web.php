@@ -108,9 +108,11 @@ Route::group(['middleware' => 'AdminRole'], function () {
         [LoanController::class, 'adminLoans']
     )->name('adminLoans');
     Route::get(
-        '/adminUnban',
-        [LoanController::class, 'adminUnban']
-    )->name('adminUnban');
+        '/userlist',
+        [AuthController::class,'UserListPage']
+    )->name('userListPage');
+    Route::post('/userlist/banUser/{id}', [AuthController::class, 'banUser'])->name('banUsers');
+    Route::post('/userlist/unbanUser/{id}', [AuthController::class, 'unbanUser'])->name('unbanUser');
     Route::get('ban/{id}', [LoanController::class, 'banUser'])->name('banUser');
 
     Route::post('verify/{id}', [LoanController::class, 'verifyBookReturn'])->name('verifyBookReturn');

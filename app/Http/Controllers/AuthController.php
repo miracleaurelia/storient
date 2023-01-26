@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -57,5 +58,24 @@ class AuthController extends Controller
             
             return redirect()->route('profile')->with('success_message','Successfully update profile');
         }
+    }
+    public function UserListPage(){
+        //get all non admin user
+        $bannedUsers = DB::table('users')->where('users.isAdmin', '=', '0')->where('users.status','=','Banned')->get();
+        $activeUsers = DB::table('users')->where('users.isAdmin', '=', '0')->where('users.status','=','Active')->get();
+
+        return view('userList',compact('bannedUsers','activeUsers'));
+    }
+    public function banUser($id){
+        $user = User::findOrFail($id);
+        $user->status = "Banned";
+        $user->save();
+        return redirect()->route('userListPage');
+    }
+    public function unbanUser($id){
+        $user = User::findOrFail($id);
+        $user->status = "Active";
+        $user->save();
+        return redirect()->route('userListPage');
     }
 }
