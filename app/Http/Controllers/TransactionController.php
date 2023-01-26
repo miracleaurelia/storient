@@ -6,6 +6,7 @@ use App\Models\Book;
 use App\Models\Cart;
 use App\Models\TransactionDetail;
 use App\Models\TransactionHeader;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -70,5 +71,11 @@ class TransactionController extends Controller
         // }
 
     }
+    public function banUser($id){
+        $user = User::findOrFail($id);
+        $user->status = 'Banned';
+        $user->save();
 
+        return redirect()->route('adminTransaction')->with('success_message', 'User banned successfully');
+    }
 }

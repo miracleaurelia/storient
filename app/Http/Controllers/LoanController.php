@@ -76,12 +76,6 @@ class LoanController extends Controller
         return redirect()->route('memberLoans')->with('success_message', 'Book borrowed successfully');
     }
 
-    public function adminUnban()
-    {
-
-
-        return view('adminUnban');
-    }
 
     protected function returnValidator(array $data)
     {

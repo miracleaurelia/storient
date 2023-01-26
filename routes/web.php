@@ -108,10 +108,13 @@ Route::group(['middleware' => 'AdminRole'], function () {
         [LoanController::class, 'adminLoans']
     )->name('adminLoans');
     Route::get(
-        '/adminUnban',
-        [LoanController::class, 'adminUnban']
-    )->name('adminUnban');
+        '/userlist',
+        [AuthController::class,'UserListPage']
+    )->name('userListPage');
+    Route::post('/userlist/banUser/{id}', [AuthController::class, 'banUser'])->name('banUsers');
+    Route::post('/userlist/unbanUser/{id}', [AuthController::class, 'unbanUser'])->name('unbanUser');
     Route::get('ban/{id}', [LoanController::class, 'banUser'])->name('banUser');
+
     Route::post('verify/{id}', [LoanController::class, 'verifyBookReturn'])->name('verifyBookReturn');
     Route::get(
         'delete/category/{id}',
@@ -119,6 +122,7 @@ Route::group(['middleware' => 'AdminRole'], function () {
     )->name('deleteCategory');
     Route::get('/display/category', [CategoryController::class, 'index'])->name('displayCategory');
     Route::post('/add/category', [CategoryController::class, 'add'])->name('addCategory');
+    Route::post('ban/{id}', [TransactionController::class, 'banUser'])->name('banUserFromTransaction');
 });
 
 Route::group(['middleware' => 'MemberRole'], function () {
