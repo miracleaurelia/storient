@@ -20,7 +20,8 @@ class LoanController extends Controller
         return view('loan', compact('returnedLoan', 'unreturnedLoan'));
     }
 
-    public function adminLoans() {
+    public function adminLoans()
+    {
         $returnedLoan = Loan::whereIn('isReturned', [1, 2])->get();
         $unreturnedLoan = Loan::where('isReturned', 0)->get();
 
@@ -75,6 +76,13 @@ class LoanController extends Controller
         return redirect()->route('memberLoans')->with('success_message', 'Book borrowed successfully');
     }
 
+    public function adminUnban()
+    {
+
+
+        return view('adminUnban');
+    }
+
     protected function returnValidator(array $data)
     {
         return Validator::make($data, [
@@ -90,7 +98,8 @@ class LoanController extends Controller
         ]);
     }
 
-    public function moveImage($string) {
+    public function moveImage($string)
+    {
         $files = request()->file($string);
         $fullFileName = $files->getClientOriginalName();
         $fileName = pathinfo($fullFileName)['filename'];
@@ -104,13 +113,13 @@ class LoanController extends Controller
         return $image;
     }
 
-    public function returnBook(Request $request, $id) {
+    public function returnBook(Request $request, $id)
+    {
         $validator = $this->returnValidator($request->all());
 
         if ($validator->fails()) {
             return redirect('/loans')->withErrors($validator)->withInput()->with('error_message', "Please upload proof(s) of book return correctly!");
-        }
-        else {
+        } else {
             $returnProof = $this->moveImage('returnProof2');
 
             $book = Loan::findOrFail($id);
@@ -128,13 +137,13 @@ class LoanController extends Controller
         }
     }
 
-    public function returnBookWithFine(Request $request, $id) {
+    public function returnBookWithFine(Request $request, $id)
+    {
         $validator = $this->returnValidatorWithFine($request->all());
 
         if ($validator->fails()) {
             return redirect('/loans')->withErrors($validator)->withInput()->with('error_message', "Please upload proof(s) of book return correctly!");
-        }
-        else {
+        } else {
             $returnProof = $this->moveImage('returnProof');
             $fineProof = $this->moveImage('fineProof');
 
@@ -149,7 +158,8 @@ class LoanController extends Controller
         }
     }
 
-    public function banUser($id) {
+    public function banUser($id)
+    {
         $user = User::findOrFail($id);
         $user->status = 'Banned';
         $user->save();
@@ -157,7 +167,8 @@ class LoanController extends Controller
         return redirect()->route('adminLoans')->with('success_message', 'User banned successfully');
     }
 
-    public function verifyBookReturn($id) {
+    public function verifyBookReturn($id)
+    {
         $loan = Loan::findOrFail($id);
         $loan->isReturned = 2;
         $loan->save();
